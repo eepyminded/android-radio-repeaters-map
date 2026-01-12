@@ -22,11 +22,11 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
 
 ## 🖥️ Screenshots
 
-![Look on specific cities](https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/Wroclaw.png)
-
-![Checking details](https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/details.png)
-
-![Whole country look](https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/country.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/Wroclaw.png" width="30%" />
+  <img src="https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/details.png" width="30%" />
+  <img src="https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/country.png" width="30%" />
+</p>
 
 ## 🤝 Credits
 - MapLibre library, specifically demos section for compose wrapper - greatly helped with making this project
