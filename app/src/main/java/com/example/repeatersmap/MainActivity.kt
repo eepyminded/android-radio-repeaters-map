@@ -166,7 +166,7 @@ fun MyApp(modifier: Modifier) {
                 id = "repeaters",
                 source = repeaterSource,
                 iconImage = image(antennaIcon),
-                iconSize = const(1.0f),
+                iconSize = const(2.0f),
                 iconAllowOverlap = const(true),
                 iconIgnorePlacement = const(true),
                 onClick = { features ->
