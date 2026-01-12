@@ -14,7 +14,7 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
 
 -   🎯 **Interactive Map Display:** Visualize radio repeater locations on a dynamic and zoomable map
 -   📍 **Repeater Location Markers:** Clearly marked points on the map representing each radio repeater
--   ℹ️ **Detailed Repeater Information:** Access details like RX/TX frequency, call sign, tone, and gAccess details like RX/TX frequency, call sign, tone, location and status upon clicking on repeater marker
+-   ℹ️ **Detailed Repeater Information:** Access details like RX/TX frequency, call sign, tone, and Access details like RX/TX frequency, call sign, tone, location and status upon clicking on repeater marker
 
 ## 🔧 TODO
 -   🔍 **Search & Filter Capabilities:** Ability to search specific repeaters, filter them
