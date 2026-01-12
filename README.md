@@ -20,7 +20,8 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
 
 ## 🔧 TODO
 -   🔍 **Search & Filter Capabilities:** Ability to search specific repeaters, filter them
--   🌍📍**GPS Implementation:** Automatically going to your location and showing close repeaters
+-   📍**GPS Implementation:** Automatically going to your location and showing close repeaters
+-   🌍❓**QTH Converter:** Add a feature to convert QTH locators to coordinates in entries where latitude and longitude are missing, so they don't end up in the middle of the ocean
 
 ## 🖥️ Screenshots
 
