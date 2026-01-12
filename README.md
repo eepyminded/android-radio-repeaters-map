@@ -32,3 +32,4 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
 
 ## 🤝 Credits
 - MapLibre library, specifically demos section for compose wrapper - greatly helped with making this project
+- To Wojtek Jakieła SQ8W from przemienniki.eu, for .json file containing all radio repeaters information for users to use
