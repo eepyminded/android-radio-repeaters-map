@@ -23,13 +23,27 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MediumTopAppBar
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,6 +54,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -47,10 +62,19 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
+import org.maplibre.android.style.expressions.Expression.literal
 import org.maplibre.compose.camera.CameraPosition
 import org.maplibre.compose.camera.rememberCameraState
+import org.maplibre.compose.expressions.ast.Expression
+import org.maplibre.compose.expressions.dsl.Feature.get
+import org.maplibre.compose.expressions.dsl.all
+import org.maplibre.compose.expressions.dsl.any
+import org.maplibre.compose.expressions.dsl.asString
 import org.maplibre.compose.expressions.dsl.const
+import org.maplibre.compose.expressions.dsl.eq
+import org.maplibre.compose.expressions.dsl.feature
 import org.maplibre.compose.expressions.dsl.image
+import org.maplibre.compose.expressions.value.BooleanValue
 import org.maplibre.compose.layers.SymbolLayer
 import org.maplibre.compose.map.GestureOptions
 import org.maplibre.compose.map.MapOptions
@@ -95,7 +119,9 @@ suspend fun loadRepeatersFromAssets(context: Context): List<RepeaterItem> {
     return withContext(Dispatchers.IO) {
         try {
             val files = context.assets.list("")
-            if (files?.contains("przemienniki.eu.json") != true) return@withContext emptyList()
+            if (files?.contains("przemienniki.eu.json") != true) {
+                return@withContext emptyList()
+            }
 
             val jsonString = context.assets.open("przemienniki.eu.json")
                 .bufferedReader()
@@ -114,6 +140,19 @@ suspend fun loadRepeatersFromAssets(context: Context): List<RepeaterItem> {
     }
 }
 
+data class repeaterFilters(
+    val showWorking: Boolean = true,
+    val showTesting: Boolean = true,
+    val showOff: Boolean = true,
+    val seventyCm: Boolean = true,
+    val twoMeters: Boolean = true,
+    val fourMeters: Boolean = true,
+    val sixMeters: Boolean = true,
+    val tenMeters: Boolean = true,
+    val crossband: Boolean = true
+)
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MyApp(modifier: Modifier) {
     val context = LocalContext.current
@@ -122,10 +161,13 @@ fun MyApp(modifier: Modifier) {
     var allRepeaters by remember { mutableStateOf<List<RepeaterItem>>(emptyList()) }
     var selectedRepeater by remember { mutableStateOf<RepeaterItem?>(null) }
 
+    var filters by remember {mutableStateOf(repeaterFilters())}
+
     LaunchedEffect(Unit) {
         allRepeaters = loadRepeatersFromAssets(context)
     }
 
+    // putting the data into the weird geojson format
     val repeatersGeoJsonData = remember(allRepeaters) {
         val features = allRepeaters.mapNotNull { item ->
             if (item.coordinates.size >= 2) {
@@ -135,8 +177,12 @@ fun MyApp(modifier: Modifier) {
                     ),
                     properties = buildJsonObject {
                         put("name", item.callsign)
+                        put("tx_freq", item.tx_frequency)
+                        put("rx_freq", item.rx_frequency)
+                        put("status", item.status)
                     }
                 )
+                // will add handling of qth codes here to coords in the future so they dont appear in the middle of nowhere
             } else null
         }
         FeatureCollection(features).toJson()
@@ -149,155 +195,190 @@ fun MyApp(modifier: Modifier) {
         )
     )
 
-    Box(modifier = modifier) {
-        MaplibreMap(
-            cameraState = camera,
-            options = MapOptions(
-                gestureOptions = GestureOptions(isRotateEnabled = false, isTiltEnabled = false)
-            ),
-            baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty")
-        ) {
-            val repeaterSource = rememberGeoJsonSource(
-                data = GeoJsonData.JsonString(repeatersGeoJsonData)
-            )
+    val sheetState = rememberModalBottomSheetState()
+    var showBottomSheet by remember { mutableStateOf(false) }
 
-            // it couldn't find the correct SymbolLayer function so it must be this ugly now..
-            org.maplibre.compose.layers.SymbolLayer(
-                id = "repeaters",
-                source = repeaterSource,
-                iconImage = image(antennaIcon),
-                iconSize = const(2.0f),
-                iconAllowOverlap = const(true),
-                iconIgnorePlacement = const(true),
-                onClick = { features ->
-                    val name = features.firstOrNull()?.properties?.get("name")?.jsonPrimitive?.content
-                    if (name != null) {
-                        selectedRepeater = allRepeaters.find { it.callsign == name }
+    Scaffold(
+        floatingActionButton = {
+            ExtendedFloatingActionButton(
+                text = { Text("Filters") },
+                icon = { Icon(Icons.Default.Info, contentDescription = null) },
+                onClick = { showBottomSheet = true }
+            )
+        }
+    ) { innerPadding ->
+        if (showBottomSheet) {
+            ModalBottomSheet(
+                onDismissRequest = {
+                    showBottomSheet = false
+                },
+                sheetState = sheetState
+            ) {
+                // filter button to be added
+            }
+        }
+                Box(modifier = modifier) {
+                    MaplibreMap(
+                        cameraState = camera,
+                        options = MapOptions(
+                            gestureOptions = GestureOptions(
+                                isRotateEnabled = false,
+                                isTiltEnabled = false
+                            )
+                        ),
+                        baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty")
+                    ) {
+                        val repeaterSource = rememberGeoJsonSource(
+                            data = GeoJsonData.JsonString(repeatersGeoJsonData)
+                        )
+
+                        // it couldn't find the correct SymbolLayer function so it must be this ugly now..
+                        // showing map here
+                        org.maplibre.compose.layers.SymbolLayer(
+                            id = "working-repeaters",
+                            source = repeaterSource,
+                            iconImage = image(antennaIcon),
+                            iconSize = const(2.0f),
+                            filter = feature["status"].asString().eq(const("working")),
+                            iconAllowOverlap = const(true),
+                            iconIgnorePlacement = const(true),
+                            onClick = { features ->
+                                val name =
+                                    features.firstOrNull()?.properties?.get("name")?.jsonPrimitive?.content
+                                if (name != null) {
+                                    selectedRepeater = allRepeaters.find { it.callsign == name }
+                                }
+                                ClickResult.Consume
+                            }
+                        )
                     }
-                    ClickResult.Consume
+
+                    if (allRepeaters.isEmpty()) {
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.Center)
+                                .background(Color.White, RoundedCornerShape(8.dp))
+                                .padding(16.dp)
+                        ) {
+                            Text("Loading data..", color = Color.Black)
+                        }
+                    }
+
+                    selectedRepeater?.let { item ->
+                        Box(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(Color.Black.copy(alpha = 0.3f))
+                                .clickable(
+                                    interactionSource = remember { MutableInteractionSource() },
+                                    indication = null
+                                ) { selectedRepeater = null }
+                        ) {
+                            CustomInfoWindow(
+                                repeater = item,
+                                onClose = { selectedRepeater = null },
+                                modifier = Modifier.align(Alignment.Center)
+                            )
+                        }
+                    }
                 }
-            )
-        }
-
-        if (allRepeaters.isEmpty()) {
-            Box(
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .background(Color.White, RoundedCornerShape(8.dp))
-                    .padding(16.dp)
-            ) {
-                Text("Loading data..", color = Color.Black)
             }
+
         }
 
-        selectedRepeater?.let { item ->
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black.copy(alpha = 0.3f))
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = null
-                    ) { selectedRepeater = null }
-            ) {
-                CustomInfoWindow(
-                    repeater = item,
-                    onClose = { selectedRepeater = null },
-                    modifier = Modifier.align(Alignment.Center)
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun CustomInfoWindow(
-    repeater: RepeaterItem,
-    onClose: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    Box(
-        modifier = modifier
-            .padding(32.dp)
-            .background(Color.White)
-            .clickable(enabled = false) {}
-            .padding(24.dp)
-    ) {
-        Column(
-            modifier = Modifier.fillMaxWidth()
+        @Composable
+        fun CustomInfoWindow(
+            repeater: RepeaterItem,
+            onClose: () -> Unit,
+            modifier: Modifier = Modifier
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            Box(
+                modifier = modifier
+                    .padding(32.dp)
+                    .background(Color.White)
+                    .clickable(enabled = false) {}
+                    .padding(24.dp)
             ) {
-                Column {
+                Column(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Column {
+                            Text(
+                                text = repeater.callsign,
+                                fontSize = 24.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = Color.Black
+                            )
+                            Text(
+                                text = repeater.qth ?: "Unknown Location",
+                                fontSize = 14.sp,
+                                color = Color.Gray
+                            )
+                        }
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "Close",
+                            tint = Color.Gray,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .clickable { onClose() }
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            InfoLabelValue("TX Freq", "${repeater.tx_frequency} MHz")
+                            Spacer(modifier = Modifier.height(8.dp))
+                            InfoLabelValue("TX CTCSS", formatCtcss(repeater.tx_ctcss))
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Column(modifier = Modifier.weight(1f)) {
+                            InfoLabelValue("RX Freq", "${repeater.rx_frequency} MHz")
+                            Spacer(modifier = Modifier.height(8.dp))
+                            InfoLabelValue("RX CTCSS", formatCtcss(repeater.rx_ctcss))
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    val statusColor = if (repeater.status.equals("working", ignoreCase = true))
+                        Color(0xFF2E7D32) else Color.Red
+
                     Text(
-                        text = repeater.callsign,
-                        fontSize = 24.sp,
+                        text = "STATUS: ${repeater.status.uppercase()}",
+                        color = statusColor,
                         fontWeight = FontWeight.Bold,
-                        color = Color.Black
-                    )
-                    Text(
-                        text = repeater.qth ?: "Unknown Location",
-                        fontSize = 14.sp,
-                        color = Color.Gray
+                        fontSize = 12.sp,
+                        modifier = Modifier.align(Alignment.End)
                     )
                 }
-                Icon(
-                    imageVector = Icons.Default.Close,
-                    contentDescription = "Close",
-                    tint = Color.Gray,
-                    modifier = Modifier
-                        .size(24.dp)
-                        .clickable { onClose() }
+            }
+        }
+
+        @Composable
+        fun InfoLabelValue(label: String, value: String) {
+            Column {
+                Text(text = label, fontSize = 11.sp, color = Color.Gray)
+                Text(
+                    text = value,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.Black
                 )
             }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.weight(1f)) {
-                    InfoLabelValue("TX Freq", "${repeater.tx_frequency} MHz")
-                    Spacer(modifier = Modifier.height(8.dp))
-                    InfoLabelValue("TX CTCSS", formatCtcss(repeater.tx_ctcss))
-                }
-                Spacer(modifier = Modifier.width(16.dp))
-                Column(modifier = Modifier.weight(1f)) {
-                    InfoLabelValue("RX Freq", "${repeater.rx_frequency} MHz")
-                    Spacer(modifier = Modifier.height(8.dp))
-                    InfoLabelValue("RX CTCSS", formatCtcss(repeater.rx_ctcss))
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            val statusColor = if (repeater.status.equals("working", ignoreCase = true))
-                Color(0xFF2E7D32) else Color.Red
-
-            Text(
-                text = "STATUS: ${repeater.status.uppercase()}",
-                color = statusColor,
-                fontWeight = FontWeight.Bold,
-                fontSize = 12.sp,
-                modifier = Modifier.align(Alignment.End)
-            )
         }
-    }
-}
 
-@Composable
-fun InfoLabelValue(label: String, value: String) {
-    Column {
-        Text(text = label, fontSize = 11.sp, color = Color.Gray)
-        Text(text = value, fontSize = 16.sp, fontWeight = FontWeight.Medium, color = Color.Black)
-    }
-}
-
-fun formatCtcss(element: JsonElement?): String {
-    val raw = element.toString().replace("\"", "")
-    return if (raw == "false" || raw == "null") {
-        "None"
-    } else
-        raw
-}
+        fun formatCtcss(element: JsonElement?): String {
+            val raw = element.toString().replace("\"", "")
+            return if (raw == "false" || raw == "null") {
+                "None"
+            } else
+                raw
+        }
