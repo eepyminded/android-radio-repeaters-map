@@ -144,12 +144,11 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-suspend fun loadRepeatersFromAssets(context: Context): List<RepeaterItem> {
-    return withContext(Dispatchers.IO) {
-        try {
+fun loadRepeatersFromAssets(context: Context): List<RepeaterItem> {
+    return try {
             val files = context.assets.list("")
             if (files?.contains("przemienniki.eu.json") != true) {
-                return@withContext emptyList()
+                return emptyList()
             }
 
             val jsonString = context.assets.open("przemienniki.eu.json")
@@ -167,7 +166,6 @@ suspend fun loadRepeatersFromAssets(context: Context): List<RepeaterItem> {
             emptyList()
         }
     }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -188,7 +186,7 @@ fun MainStructure(modifier: Modifier) {
 
                 NavigationDrawerItem(
                     label = { Text("View repeaters") },
-                    selected = false,
+                    selected = currentStateID == "repeaters_screen",
                     icon = { Icon(Icons.Default.Place, contentDescription = "Map with repeaters")},
                     onClick = {
                         if (currentStateID != "repeaters_screen")
@@ -201,7 +199,7 @@ fun MainStructure(modifier: Modifier) {
 
                 NavigationDrawerItem(
                     label = { Text("Info screen") },
-                    selected = false,
+                    selected = currentStateID == "info_screen",
                     icon = { Icon(Icons.Default.Info, contentDescription = "Informations")},
                     onClick = {
                         if (currentStateID != "info_screen")
@@ -323,9 +321,7 @@ fun MainStructure(modifier: Modifier) {
         var checked6m by remember { mutableStateOf(true) }
         var checked10m by remember { mutableStateOf(true) }
 
-        LaunchedEffect(Unit) {
-            allRepeaters = loadRepeatersFromAssets(context)
-        }
+        allRepeaters = loadRepeatersFromAssets(context)
 
         // putting the data into the weird geojson format
         val repeatersGeoJsonData = remember(allRepeaters) {
