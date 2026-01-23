@@ -14,6 +14,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,6 +29,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Place
@@ -37,6 +39,8 @@ import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -69,8 +73,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.LinkAnnotation
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextLinkStyles
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withLink
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
@@ -198,7 +207,7 @@ fun MainStructure(modifier: Modifier) {
                 )
 
                 NavigationDrawerItem(
-                    label = { Text("Info screen") },
+                    label = { Text("About") },
                     selected = currentStateID == "info_screen",
                     icon = { Icon(Icons.Default.Info, contentDescription = "Informations")},
                     onClick = {
@@ -235,7 +244,7 @@ fun MainStructure(modifier: Modifier) {
         ) { innerPadding ->
             NavHost(
                 navController = navController,
-                startDestination = "info_screen",
+                startDestination = "repeaters_screen",
                 modifier = Modifier.padding(innerPadding)
             ) {
                 composable("repeaters_screen") {
@@ -245,10 +254,9 @@ fun MainStructure(modifier: Modifier) {
                     InfoScreen(modifier = Modifier)
                 }
             }
-
         }
     }
-    }
+}
 
     @Composable
     fun InfoScreen(modifier: Modifier) {
@@ -261,7 +269,7 @@ fun MainStructure(modifier: Modifier) {
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    text = "Projekt końcowy",
+                    text = "About Screen",
                     style = MaterialTheme.typography.headlineMedium.copy(
                         fontWeight = FontWeight.ExtraBold,
                         letterSpacing = 1.sp
@@ -269,16 +277,10 @@ fun MainStructure(modifier: Modifier) {
                     color = MaterialTheme.colorScheme.primary
                 )
 
-                Text(
-                    text = "Android - Laboratorium",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "Interaktywna mapa, która pozwala na znalezienie przemienników radiowych w swojej okolicy.",
+                    text = "Interactive map of Polish ham radio repeaters, with dynamic filters",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center
@@ -287,7 +289,7 @@ fun MainStructure(modifier: Modifier) {
                 Spacer(modifier = Modifier.height(16.dp))
 
                 Text(
-                    text = "",
+                    text = "This is me, if you even care..",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -295,9 +297,23 @@ fun MainStructure(modifier: Modifier) {
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Image(
-                    painter = painterResource(id = R.drawable.logo_pwr_kolor_pion_ang__bez_tla),
-                    contentDescription = "Technological University of Wrocław logo",
+                    painter = painterResource(id = R.drawable.elegant_creature_at_puter),
+                    contentDescription = "Luna at computer",
                     modifier = Modifier.size(180.dp)
+                )
+
+                Text(
+                    buildAnnotatedString {
+                        withLink(
+                            LinkAnnotation.Url(
+                                "https://madi.systems/",
+                                TextLinkStyles(style = SpanStyle(color = Color.Blue))
+                            ),
+                            {
+                                append("My website")
+                            }
+                        )
+                    }
                 )
             }
         }
@@ -315,9 +331,14 @@ fun MainStructure(modifier: Modifier) {
         var checkedWorking by remember { mutableStateOf(true) }
         var checkedStopped by remember { mutableStateOf(true) }
         var checkedPlanned by remember { mutableStateOf(true) }
+        var checkedTesting by remember { mutableStateOf(true) }
+        var checkedBuilding by remember { mutableStateOf(true) }
+        var checkedUnverified by remember { mutableStateOf(true) }
 
+        var checked23cm by remember { mutableStateOf(true) }
         var checked70cm by remember { mutableStateOf(true) }
         var checked2m by remember { mutableStateOf(true) }
+        var checked4m by remember { mutableStateOf(true) }
         var checked6m by remember { mutableStateOf(true) }
         var checked10m by remember { mutableStateOf(true) }
 
@@ -379,52 +400,26 @@ fun MainStructure(modifier: Modifier) {
                         modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp)
                     ) {
                         Text("Repeaters Status")
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
+                        FlowRow(
+
                         ) {
-                            Text("Working")
-                            Checkbox(
-                                checked = checkedWorking,
-                                onCheckedChange = { checkedWorking = it}
-                            )
-                            Text("Off")
-                            Checkbox(
-                                checked = checkedStopped,
-                                onCheckedChange = { checkedStopped = it}
-                            )
-                            Text("Planned")
-                            Checkbox(
-                                checked = checkedPlanned,
-                                onCheckedChange = { checkedPlanned = it}
-                            )
+                            FilteringButton(checkedWorking, "working", { checkedWorking = !checkedWorking })
+                            FilteringButton(checkedPlanned, "planned", { checkedPlanned = !checkedPlanned })
+                            FilteringButton(checkedTesting, "testing", { checkedTesting = !checkedTesting })
+                            FilteringButton(checkedBuilding, "being built", { checkedBuilding = !checkedBuilding })
+                            FilteringButton(checkedUnverified, "unverified", {checkedUnverified = !checkedUnverified})
                         }
+
+
                         Text("Frequency")
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically
+                        FlowRow(
                         ) {
-                            Text("70CM")
-                            Checkbox(
-                                checked = checked70cm,
-                                onCheckedChange = { checked70cm = it}
-                            )
-
-                            Text("2M")
-                            Checkbox(
-                                checked = checked2m,
-                                onCheckedChange = { checked2m = it}
-                            )
-
-                            Text("6M")
-                            Checkbox(
-                                checked = checked6m,
-                                onCheckedChange = { checked6m = it}
-                            )
-
-                            Text("10M")
-                            Checkbox(
-                                checked = checked10m,
-                                onCheckedChange = { checked10m = it}
-                            )
+                            FilteringButton(checked23cm, "23cm", {checked23cm = !checked23cm})
+                            FilteringButton(checked70cm, "70cm", {checked70cm = !checked70cm})
+                            FilteringButton(checked2m, "2m", {checked2m = !checked2m})
+                            FilteringButton(checked4m, "4m", {checked4m = !checked4m})
+                            FilteringButton(checked6m, "6m", {checked6m = !checked6m})
+                            FilteringButton(checked10m, "10m", {checked10m = !checked10m})
                         }
                     }
                 }
@@ -449,20 +444,29 @@ fun MainStructure(modifier: Modifier) {
                         if (checkedWorking) add(feature["status"].asString().eq(const("working")))
                         if (checkedStopped) add(feature["status"].asString().eq(const("off")))
                         if (checkedPlanned) add(feature["status"].asString().eq(const("planned")))
+                        if (checkedTesting) add(feature["status"].asString().eq(const("testing")))
+                        if (checkedBuilding) add(feature["status"].asString().eq(const("inprogress")))
+                        if (checkedUnverified) add(feature["status"].asString().eq(const("unverified")))
                     }
 
                     val frequencyFilters = mutableListOf<Expression<BooleanValue>>().apply {
+                        if (checked23cm) {
+                            add(feature["tx_freq"].asNumber().gt(const(1240.0f)).and(feature["tx_freq"].asNumber().lt(const(1300.0f))).and(feature["rx_freq"].asNumber().gt(const(1240.0f)).and(feature["rx_freq"].asNumber().lt(const(1300.0f)))))
+                        }
                         if (checked70cm) {
-                            add(feature["tx_freq"].asNumber().gt(const(420.0f)).and(feature["tx_freq"].asNumber().lt(const(450.0f))))
+                            add(feature["tx_freq"].asNumber().gt(const(420.0f)).and(feature["tx_freq"].asNumber().lt(const(450.0f))).and(feature["rx_freq"].asNumber().gt(const(420.0f)).and(feature["rx_freq"].asNumber().lt(const(450.0f)))))
                         }
                         if (checked2m) {
-                            add(feature["tx_freq"].asNumber().gt(const(144.0f)).and(feature["tx_freq"].asNumber().lt(const(146.0f))))
+                            add(feature["tx_freq"].asNumber().gt(const(144.0f)).and(feature["tx_freq"].asNumber().lt(const(146.0f))).and(feature["rx_freq"].asNumber().gt(const(146.0f)).and(feature["rx_freq"].asNumber().lt(const(146.0f)))))
+                        }
+                        if (checked4m) {
+                            add(feature["tx_freq"].asNumber().gt(const(70.0f)).and(feature["tx_freq"].asNumber().lt(const(70.3f))).and(feature["rx_freq"].asNumber().gt(const(70.0f)).and(feature["rx_freq"].asNumber().lt(const(70.3f)))))
                         }
                         if (checked6m) {
-                            add(feature["tx_freq"].asNumber().gt(const(50.0f)).and(feature["tx_freq"].asNumber().lt(const(54.0f))))
+                            add(feature["tx_freq"].asNumber().gt(const(50.0f)).and(feature["tx_freq"].asNumber().lt(const(52.0f))).and(feature["rx_freq"].asNumber().gt(const(50.0f)).and(feature["rx_freq"].asNumber().lt(const(52.0f)))))
                         }
                         if (checked10m) {
-                            add(feature["tx_freq"].asNumber().gt(const(28.0f)).and(feature["tx_freq"].asNumber().lt(const(29.7f))))
+                            add(feature["tx_freq"].asNumber().gt(const(28.0f)).and(feature["tx_freq"].asNumber().lt(const(29.7f))).and(feature["rx_freq"].asNumber().gt(const(20.0f)).and(feature["rx_freq"].asNumber().lt(const(29.7f)))))
                         }
                     }
                     val finalFilter = if (statusFilters.isEmpty() || frequencyFilters.isEmpty()) {
@@ -524,8 +528,26 @@ fun MainStructure(modifier: Modifier) {
                 }
             }
         }
-
     }
+
+        // custom filtering button
+        @Composable
+        fun FilteringButton(userBoolean: Boolean, userString: String, toggle: () -> Unit) {
+            FilterChip(
+                onClick = toggle,
+                label = { Text(userString) },
+                selected = userBoolean,
+                leadingIcon = {
+                    if (userBoolean) {
+                        Icon(
+                            imageVector = Icons.Filled.Done,
+                            contentDescription = null,
+                            modifier = Modifier.size(FilterChipDefaults.IconSize)
+                        )
+                    }
+                }
+            )
+        }
 
         @Composable
         fun CustomInfoWindow(
