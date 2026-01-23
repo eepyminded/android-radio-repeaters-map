@@ -4,7 +4,7 @@
 
 <div align="center">
 
-**An interactive Android Compose map showing amateur radio repeaters**
+**University Project - An interactive Android Compose map showing amateur radio repeaters**
 
 </div>
 
@@ -17,9 +17,9 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
 -   🎯 **Interactive Map Display:** Visualize radio repeater locations on a dynamic and zoomable map
 -   📍 **Repeater Location Markers:** Clearly marked points on the map representing each radio repeater
 -   ℹ️ **Detailed Repeater Information:** Access details like RX/TX frequency, call sign, tone, and status upon clicking on repeater marker
--   🔍 **Search & Filter Capabilities:** Ability to search specific repeaters, filter them
 
 ## 🔧 TODO
+-   🔍 **Search & Filter Capabilities:** Ability to search specific repeaters, filter them
 -   📍**GPS Implementation:** Automatically going to your location and showing close repeaters
 -   🌍❓**QTH Converter:** Add a feature to convert QTH locators to coordinates in entries where latitude and longitude are missing, so they don't end up in the middle of the ocean
 
