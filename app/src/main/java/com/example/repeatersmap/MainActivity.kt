@@ -401,9 +401,9 @@ fun MainStructure(modifier: Modifier) {
                     ) {
                         Text("Repeaters Status")
                         FlowRow(
-
                         ) {
                             FilteringButton(checkedWorking, "working", { checkedWorking = !checkedWorking })
+                            FilteringButton(checkedStopped, "turned off", {checkedStopped = !checkedStopped})
                             FilteringButton(checkedPlanned, "planned", { checkedPlanned = !checkedPlanned })
                             FilteringButton(checkedTesting, "testing", { checkedTesting = !checkedTesting })
                             FilteringButton(checkedBuilding, "being built", { checkedBuilding = !checkedBuilding })
