@@ -12,7 +12,7 @@ foundationLayout = "1.11.4"
 spatialkGeojson = "0.7.0"
 gson = "2.14.0"
 kotlinxSerializationJson = "1.11.0"
-playServicesLocation = "21.3.0"
+playServicesLocation = "21.4.0"
 navigationCompose = "2.9.8"
 
 [libraries]
