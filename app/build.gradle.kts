@@ -49,7 +49,6 @@ android {
 dependencies {
     implementation(libs.maplibre.compose)
     implementation(libs.maplibre.spatialk.geojson)
-    implementation(libs.play.services.location)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.gson)

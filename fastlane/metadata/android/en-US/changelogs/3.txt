@@ -1,0 +1,5 @@
+Version 0.0.3:
+- Upgraded to MapLibre Compose vector map rendering engine
+- Added frequency band filters (2m, 10m, 70cm, 4m, 6m, 23cm)
+- Integrated native system location support for F-Droid compatibility
+- Enhanced filter sheet UI with smooth scrolling and animations

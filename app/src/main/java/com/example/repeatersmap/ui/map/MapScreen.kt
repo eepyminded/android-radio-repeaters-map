@@ -52,14 +52,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import android.content.Context
+import android.location.LocationManager
+import androidx.core.location.LocationManagerCompat
+import androidx.core.os.CancellationSignal
 import com.example.repeatersmap.R
 import com.example.repeatersmap.data.model.RepeaterItem
 import com.example.repeatersmap.data.repository.RepeaterRepository
 import com.example.repeatersmap.ui.components.CustomInfoWindow
 import com.example.repeatersmap.ui.components.FilteringButton
 import com.example.repeatersmap.ui.components.fadingEdge
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.Priority
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -107,7 +109,6 @@ fun MapScreen(modifier: Modifier = Modifier) {
     val coroutineScope = rememberCoroutineScope()
     val antennaIcon = painterResource(R.drawable.antenna_icon)
 
-    val fusedLocationClient = remember { LocationServices.getFusedLocationProviderClient(context) }
     var userPosition by remember { mutableStateOf<Position?>(null) }
 
     var allRepeaters by remember { mutableStateOf<List<RepeaterItem>>(emptyList()) }
@@ -139,37 +140,54 @@ fun MapScreen(modifier: Modifier = Modifier) {
             val hasFine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
             val hasCoarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
             if (hasFine || hasCoarse) {
-                fusedLocationClient.lastLocation
-                    .addOnSuccessListener { location ->
-                        if (location != null) {
-                            val pos = Position(longitude = location.longitude, latitude = location.latitude)
+                val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                val provider = when {
+                    locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) -> LocationManager.GPS_PROVIDER
+                    locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) -> LocationManager.NETWORK_PROVIDER
+                    else -> null
+                }
+
+                if (provider == null) {
+                    Toast.makeText(context, "Location services (GPS) are disabled.", Toast.LENGTH_SHORT).show()
+                    return
+                }
+
+                val lastLocation = try {
+                    val gpsLoc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                    val netLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                    when {
+                        gpsLoc != null && netLoc != null -> if (gpsLoc.time > netLoc.time) gpsLoc else netLoc
+                        gpsLoc != null -> gpsLoc
+                        else -> netLoc
+                    }
+                } catch (e: SecurityException) {
+                    null
+                }
+
+                if (lastLocation != null) {
+                    val pos = Position(longitude = lastLocation.longitude, latitude = lastLocation.latitude)
+                    userPosition = pos
+                    coroutineScope.launch {
+                        camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
+                    }
+                } else {
+                    LocationManagerCompat.getCurrentLocation(
+                        locationManager,
+                        provider,
+                        CancellationSignal(),
+                        ContextCompat.getMainExecutor(context)
+                    ) { freshLocation ->
+                        if (freshLocation != null) {
+                            val pos = Position(longitude = freshLocation.longitude, latitude = freshLocation.latitude)
                             userPosition = pos
                             coroutineScope.launch {
                                 camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
                             }
                         } else {
-                            fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
-                                .addOnSuccessListener { freshLocation ->
-                                    if (freshLocation != null) {
-                                        val pos = Position(longitude = freshLocation.longitude, latitude = freshLocation.latitude)
-                                        userPosition = pos
-                                        coroutineScope.launch {
-                                            camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
-                                        }
-                                    } else {
-                                        Toast.makeText(context, "Location unavailable. Please check if GPS is enabled.", Toast.LENGTH_SHORT).show()
-                                    }
-                                }
-                                .addOnFailureListener { e ->
-                                    Log.e("MAP_LOCATION", "getCurrentLocation failed", e)
-                                    Toast.makeText(context, "Could not acquire GPS location.", Toast.LENGTH_SHORT).show()
-                                }
+                            Toast.makeText(context, "Location unavailable. Please check if GPS is enabled.", Toast.LENGTH_SHORT).show()
                         }
                     }
-                    .addOnFailureListener { e ->
-                        Log.e("MAP_LOCATION", "lastLocation failed", e)
-                        Toast.makeText(context, "Error fetching location.", Toast.LENGTH_SHORT).show()
-                    }
+                }
             } else {
                 Toast.makeText(context, "Location permission not granted.", Toast.LENGTH_SHORT).show()
             }

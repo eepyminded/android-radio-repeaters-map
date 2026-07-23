@@ -1,0 +1,9 @@
+An interactive Android map application for radio operators to discover, search, filter, and inspect amateur radio repeaters.
+
+Features:
+- Dynamic vector map rendering powered by MapLibre Compose
+- Complete offline dataset of amateur radio repeaters
+- Real-time repeater status filters (working, planned, testing, being built, turned off, unverified)
+- Frequency band filters (23cm, 70cm, 2m, 4m, 6m, 10m)
+- User GPS location dot and accuracy overlay
+- Detailed repeater info popups with callsign, transmit/receive frequencies, QTH location, and CTCSS tones
