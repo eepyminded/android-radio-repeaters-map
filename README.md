@@ -31,6 +31,8 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
   <img src="https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/country.png" width="30%" />
 </p>
 
-## 🤝 Credits
-- MapLibre library, specifically demos section for compose wrapper - greatly helped with making this project
-- To Wojtek Jakieła SQ8W from przemienniki.eu, for .json file containing all radio repeaters information for users to use
+## 🤝 Credits & Acknowledgments
+
+- **[MapLibre Compose](https://github.com/maplibre/maplibre-compose):** Open-source vector map SDK for Jetpack Compose.
+- **[OpenFreeMap](https://openfreemap.org) & [OpenStreetMap](https://www.openstreetmap.org/copyright):** Map tile rendering and map data (© OpenStreetMap contributors).
+- **Wojtek Jakieła SQ8W ([przemienniki.eu](https://przemienniki.eu)):** Comprehensive dataset of Polish amateur radio repeaters.
