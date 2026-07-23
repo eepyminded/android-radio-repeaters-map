@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # Maintain Gradle dependencies in libs.versions.toml & build.gradle.kts
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Warsaw"
+    open-pull-requests-limit: 10
+    target-branch: "main"
+    labels:
+      - "dependencies"
+      - "android"

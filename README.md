@@ -17,11 +17,11 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
 -   🎯 **Interactive Map Display:** Visualize radio repeater locations on a dynamic and zoomable map
 -   📍 **Repeater Location Markers:** Clearly marked points on the map representing each radio repeater
 -   ℹ️ **Detailed Repeater Information:** Access details like RX/TX frequency, call sign, tone, and status upon clicking on repeater marker
--   🔍 **Search & Filter Capabilities:** Ability to search specific repeaters, filter them
+-   🔍 **Search & Filter Capabilities:** Filter repeaters by frequency band (23cm, 70cm, 2m, 4m, 6m, 10m) and operational status
+-   📍 **GPS Localization & Real-Time Location:** Automatically center on your position with smooth camera animations and live visual location
 
 ## 🔧 TODO
--   📍**GPS Implementation:** Automatically going to your location and showing close repeaters
--   🌍❓**QTH Converter:** Add a feature to convert QTH locators to coordinates in entries where latitude and longitude are missing, so they don't end up in the middle of the ocean
+-   🌍❓ **QTH Converter:** Add a feature to convert QTH locators (e.g., `KO02MM`) to coordinates in entries where latitude and longitude are missing, so they don't end up in the middle of the ocean
 
 ## 🖥️ Screenshots
 

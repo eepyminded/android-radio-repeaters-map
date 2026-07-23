@@ -10,7 +10,7 @@ plugins {
 android {
     namespace = "com.example.repeatersmap"
     compileSdk {
-        version = release(36)
+        version = release(37)
     }
 
     defaultConfig {
@@ -48,12 +48,13 @@ android {
 
 dependencies {
     implementation(libs.maplibre.compose)
-    implementation("org.maplibre.spatialk:geojson:0.6.1")
-    implementation("androidx.compose.material3:material3:1.4.0")
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
-    implementation("com.google.code.gson:gson:2.13.2")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
-    implementation("androidx.navigation:navigation-compose:2.9.6")
+    implementation(libs.maplibre.spatialk.geojson)
+    implementation(libs.play.services.location)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
+    implementation(libs.gson)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.navigation.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
