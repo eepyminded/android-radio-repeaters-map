@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keep class com.example.repeatersmap.data.model.** { *; }
+-keepclassmembers class com.example.repeatersmap.data.model.** { *; }
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod
