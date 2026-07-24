@@ -53,9 +53,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import android.content.Context
+import android.os.Build
 import android.location.LocationManager
 import androidx.core.location.LocationManagerCompat
-import androidx.core.os.CancellationSignal
 import com.example.repeatersmap.R
 import com.example.repeatersmap.data.model.RepeaterItem
 import com.example.repeatersmap.data.repository.RepeaterRepository
@@ -171,21 +171,35 @@ fun MapScreen(modifier: Modifier = Modifier) {
                         camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
                     }
                 } else {
-                    LocationManagerCompat.getCurrentLocation(
-                        locationManager,
-                        provider,
-                        CancellationSignal(),
-                        ContextCompat.getMainExecutor(context)
-                    ) { freshLocation ->
-                        if (freshLocation != null) {
-                            val pos = Position(longitude = freshLocation.longitude, latitude = freshLocation.latitude)
-                            userPosition = pos
-                            coroutineScope.launch {
-                                camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                        locationManager.getCurrentLocation(
+                            provider,
+                            null,
+                            ContextCompat.getMainExecutor(context)
+                        ) { freshLocation ->
+                            if (freshLocation != null) {
+                                val pos = Position(longitude = freshLocation.longitude, latitude = freshLocation.latitude)
+                                userPosition = pos
+                                coroutineScope.launch {
+                                    camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
+                                }
+                            } else {
+                                Toast.makeText(context, "Location unavailable. Please check if GPS is enabled.", Toast.LENGTH_SHORT).show()
                             }
-                        } else {
-                            Toast.makeText(context, "Location unavailable. Please check if GPS is enabled.", Toast.LENGTH_SHORT).show()
                         }
+                    } else {
+                        @Suppress("DEPRECATION")
+                        locationManager.requestSingleUpdate(
+                            provider,
+                            { freshLocation ->
+                                val pos = Position(longitude = freshLocation.longitude, latitude = freshLocation.latitude)
+                                userPosition = pos
+                                coroutineScope.launch {
+                                    camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
+                                }
+                            },
+                            android.os.Looper.getMainLooper()
+                        )
                     }
                 }
             } else {
