@@ -17,8 +17,30 @@ android {
         applicationId = "com.example.repeatersmap"
         minSdk = 27
         targetSdk = 36
+
         versionCode = 4
         versionName = "0.0.3.2"
+
+        val targetAbi = project.findProperty("targetAbi") as String?
+
+        if (!targetAbi.isNullOrEmpty()) {
+            ndk {
+                abiFilters.clear()
+                abiFilters.add(targetAbi)
+            }
+
+            val abiCode = when (targetAbi) {
+                "armeabi-v7a" -> 1
+                "arm64-v8a" -> 2
+                "x86" -> 3
+                "x86_64" -> 4
+                else -> 0
+            }
+
+            if (abiCode != 0) {
+                versionCode = 4 * 10 + abiCode
+            }
+        }
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

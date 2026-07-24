@@ -102,6 +102,14 @@ import org.maplibre.spatialk.geojson.Point
 import org.maplibre.spatialk.geojson.Position
 import org.maplibre.spatialk.geojson.toJson
 
+private var activeToast: Toast? = null
+
+private fun showSingleToast(context: Context, message: String, duration: Int = Toast.LENGTH_SHORT) {
+    activeToast?.cancel()
+    activeToast = Toast.makeText(context.applicationContext, message, duration)
+    activeToast?.show()
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapScreen(modifier: Modifier = Modifier) {
@@ -141,20 +149,23 @@ fun MapScreen(modifier: Modifier = Modifier) {
             val hasCoarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
             if (hasFine || hasCoarse) {
                 val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                val gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                val networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+
                 val provider = when {
-                    locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) -> LocationManager.GPS_PROVIDER
-                    locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) -> LocationManager.NETWORK_PROVIDER
+                    hasFine && gpsEnabled -> LocationManager.GPS_PROVIDER
+                    networkEnabled -> LocationManager.NETWORK_PROVIDER
                     else -> null
                 }
 
                 if (provider == null) {
-                    Toast.makeText(context, "Location services (GPS) are disabled.", Toast.LENGTH_SHORT).show()
+                    showSingleToast(context, "Fine location on GPS was denied.")
                     return
                 }
 
                 val lastLocation = try {
-                    val gpsLoc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-                    val netLoc = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                    val gpsLoc = if (hasFine && gpsEnabled) locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) else null
+                    val netLoc = if (networkEnabled) locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER) else null
                     when {
                         gpsLoc != null && netLoc != null -> if (gpsLoc.time > netLoc.time) gpsLoc else netLoc
                         gpsLoc != null -> gpsLoc
@@ -184,7 +195,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
                                     camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
                                 }
                             } else {
-                                Toast.makeText(context, "Location unavailable. Please check if GPS is enabled.", Toast.LENGTH_SHORT).show()
+                                showSingleToast(context, "Location unavailable. Please check if GPS is enabled.")
                             }
                         }
                     } else {
@@ -203,11 +214,11 @@ fun MapScreen(modifier: Modifier = Modifier) {
                     }
                 }
             } else {
-                Toast.makeText(context, "Location permission not granted.", Toast.LENGTH_SHORT).show()
+                showSingleToast(context, "Location permission denied. Please enable location in Android Settings.", Toast.LENGTH_LONG)
             }
         } catch (e: Exception) {
             Log.e("MAP_LOCATION", "Error acquiring user location", e)
-            Toast.makeText(context, "Unable to access location services.", Toast.LENGTH_SHORT).show()
+            showSingleToast(context, "Unable to access location services.")
         }
     }
 
@@ -218,6 +229,8 @@ fun MapScreen(modifier: Modifier = Modifier) {
                 permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
         if (isGranted) {
             fetchUserLocation()
+        } else {
+            showSingleToast(context, "Location permission denied. Please enable location in Android Settings.", Toast.LENGTH_LONG)
         }
     }
 
@@ -335,7 +348,9 @@ fun MapScreen(modifier: Modifier = Modifier) {
                 sheetState = sheetState
             ) {
                 Column(
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 32.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 32.dp)
                 ) {
                     Text(
                         text = "Repeaters Status",
