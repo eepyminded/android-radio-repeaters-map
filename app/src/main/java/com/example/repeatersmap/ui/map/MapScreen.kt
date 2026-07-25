@@ -82,7 +82,10 @@ import org.maplibre.compose.expressions.dsl.eq
 import org.maplibre.compose.expressions.dsl.feature
 import org.maplibre.compose.expressions.dsl.gt
 import org.maplibre.compose.expressions.dsl.image
+import org.maplibre.compose.expressions.dsl.interpolate
+import org.maplibre.compose.expressions.dsl.linear
 import org.maplibre.compose.expressions.dsl.lt
+import org.maplibre.compose.expressions.dsl.zoom
 import org.maplibre.compose.expressions.value.BooleanValue
 import org.maplibre.compose.layers.CircleLayer
 import org.maplibre.compose.layers.SymbolLayer
@@ -493,16 +496,31 @@ fun MapScreen(modifier: Modifier = Modifier) {
                         id = "user-location-halo",
                         source = userSource,
                         color = const(Color(0x332196F3)),
-                        radius = const(18.dp)
+                        radius = interpolate(
+                            linear(),
+                            zoom(),
+                            5 to const(10.dp),
+                            12 to const(18.dp)
+                        )
                     )
 
                     CircleLayer(
                         id = "user-location-dot",
                         source = userSource,
                         color = const(Color(0xFF2196F3)),
-                        radius = const(8.dp),
+                        radius = interpolate(
+                            linear(),
+                            zoom(),
+                            5 to const(5.dp),
+                            12 to const(8.dp)
+                        ),
                         strokeColor = const(Color.White),
-                        strokeWidth = const(3.dp)
+                        strokeWidth = interpolate(
+                            linear(),
+                            zoom(),
+                            5 to const(2.dp),
+                            12 to const(3.dp)
+                        )
                     )
                 }
             }

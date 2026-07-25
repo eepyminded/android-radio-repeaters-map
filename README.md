@@ -26,9 +26,14 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
 ## 🖥️ Screenshots
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/Wroclaw.png" width="30%" />
-  <img src="https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/details.png" width="30%" />
-  <img src="https://raw.githubusercontent.com/eepyminded/android-radio-repeaters-map/refs/heads/main/images/country.png" width="30%" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/01_city.png" width="30%" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/02_details.png" width="30%" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/03_map.png" width="30%" />
+</p>
+<p align="center">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/04_localization.png" width="30%" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/05_filters.png" width="30%" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/06_filters.png" width="30%" />
 </p>
 
 ## 🤝 Credits & Acknowledgments

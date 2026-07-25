@@ -30,20 +30,74 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build Release APK
+      - name: Build, Align, and Sign Release APKs
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || secrets.KEYSTORE_PASSWORD }}
         run: |
           mkdir -p build/outputs/release-apk
 
+          # setup keystore
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "Using keystore from GitHub Secrets..."
+            echo "$KEYSTORE_BASE64" | base64 --decode > release.keystore
+          else
+            echo "❌ Error: KEYSTORE_BASE64 secret is missing in GitHub repository secrets!"
+            exit 1
+          fi
+
+          # locate Android SDK tools dynamically
+          BUILD_TOOLS=$(ls -1d $ANDROID_HOME/build-tools/* | sort -V | tail -n 1)
+          ZIPALIGN="$BUILD_TOOLS/zipalign"
+          APKSIGNER="$BUILD_TOOLS/apksigner"
+
+          echo "Using zipalign at: $ZIPALIGN"
+          echo "Using apksigner at: $APKSIGNER"
+
+          # build, align, and sign APKs for each ABI
           for ABI in arm64-v8a armeabi-v7a x86 x86_64; do
             echo "Building APK for $ABI..."
+
             ./gradlew clean assembleRelease -PtargetAbi=$ABI
-            cp app/build/outputs/apk/release/app-release-unsigned.apk build/outputs/release-apk/android-radio-repeaters-map-${{ github.ref_name }}-$ABI.apk
+
+            UNSIGNED_APK=$(find app/build/outputs/apk/release -name "*.apk" | head -n 1)
+            ALIGNED_APK="aligned-$ABI.apk"
+            SIGNED_APK="build/outputs/release-apk/android-radio-repeaters-map-${{ github.ref_name }}-$ABI.apk"
+
+            # calculating the hashes before signing for future verification
+            UNSIGNED_HASH=$(sha256sum "$UNSIGNED_APK" | awk '{print $1}')
+            echo "$UNSIGNED_HASH  android-radio-repeaters-map-${{ github.ref_name }}-$ABI-unsigned.apk" >> build/outputs/release-apk/unsigned_sha256sums.txt
+
+            echo "Aligning APK for $ABI..."
+            "$ZIPALIGN" -v -p 4 "$UNSIGNED_APK" "$ALIGNED_APK"
+
+            echo "Signing APK for $ABI..."
+            "$APKSIGNER" sign --ks release.keystore \
+              --ks-pass env:KEYSTORE_PASSWORD \
+              --key-pass env:KEY_PASSWORD \
+              --ks-key-alias "$KEY_ALIAS" \
+              --out "$SIGNED_APK" "$ALIGNED_APK"
+
+            rm "$ALIGNED_APK"
           done
 
-      - name: Rename APK for Release
+          # clean up the keystore
+          rm release.keystore
+
+      - name: Rename APK for Release & Generate Checksums
         run: |
           cd build/outputs/release-apk
+
           sha256sum *.apk > sha256sums.txt
+
+          echo "" >> sha256sums.txt
+          echo "--- Unsigned APK Checksums ---" >> sha256sums.txt
+          cat unsigned_sha256sums.txt >> sha256sums.txt
+
+          rm unsigned_sha256sums.txt
+
           cat sha256sums.txt
           echo "### 🔐 Release APK SHA-256 Checksums" >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
@@ -56,7 +110,7 @@ jobs:
           files: build/outputs/release-apk/*
           name: Release ${{ github.ref_name }}
           draft: false
-          prerelease: false
+          prerelease: true
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
