@@ -21,6 +21,7 @@ android {
         versionCode = 4
         versionName = "0.0.3.2"
 
+        val baseCode = versionCode ?: 4
         val targetAbi = project.findProperty("targetAbi") as String?
 
         if (!targetAbi.isNullOrEmpty()) {
@@ -38,7 +39,7 @@ android {
             }
 
             if (abiCode != 0) {
-                versionCode = 4 * 10 + abiCode
+                versionCode = baseCode * 10 + abiCode
             }
         }
 
@@ -49,6 +50,7 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            vcsInfo.include = false // reproducible builds for fdroid
 
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -67,6 +69,13 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+}
+
+// disable artprofile generation for reproducibility
+tasks.whenTaskAdded {
+    if (name.contains("ArtProfile")) {
+        enabled = false
     }
 }
 
