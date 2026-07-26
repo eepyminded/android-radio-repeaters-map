@@ -1,0 +1,4 @@
+Version 0.0.3.3:
+- Dynamic GPS marker scaling on zoom
+- UI spacing adjustments in popup cards
+- Updated README and Fastlane screenshots

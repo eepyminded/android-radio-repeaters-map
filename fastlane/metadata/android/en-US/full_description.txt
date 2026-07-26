@@ -6,4 +6,5 @@ Features:
 - Real-time repeater status filters (working, planned, testing, being built, turned off, unverified)
 - Frequency band filters (23cm, 70cm, 2m, 4m, 6m, 10m)
 - User GPS location dot and accuracy overlay
+- Lightweight native location support (no Google Play Services required)
 - Detailed repeater info popups with callsign, transmit/receive frequencies, QTH location, and CTCSS tones

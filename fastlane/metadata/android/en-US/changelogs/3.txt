@@ -1,5 +1,10 @@
-Version 0.0.3:
-- Upgraded to MapLibre Compose vector map rendering engine
-- Added frequency band filters (2m, 10m, 70cm, 4m, 6m, 23cm)
-- Integrated native system location support for F-Droid compatibility
-- Enhanced filter sheet UI with smooth scrolling and animations
+Version 0.0.3.1 / 0.0.3:
+- Automated GitHub Actions APK release workflow
+- Added SHA-256 verification and Fastlane metadata structure
+- Added live GPS location button
+- Offline map tile caching for Poland
+- Asynchronous dataset loading
+- Horizontal filter bar
+- Fixed 2m, 10m, and 4m frequency band filters
+- Disabled map drawer swipe gesture
+- Refactored code into clean architecture packages

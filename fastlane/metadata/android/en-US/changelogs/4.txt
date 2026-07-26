@@ -1,0 +1,6 @@
+Version 0.0.3.2:
+- Switched to native Android location API (removed Google Play Services)
+- Added architecture-specific APK builds (arm64, armv7, x86, x86_64)
+- Configured reproducible builds and SHA-256 checksums
+- Fixed close button alignment on info popups
+- Updated Gradle wrapper

@@ -1,0 +1,5 @@
+Version 0.0.3.4:
+- Clean inline location support for Coarse and Fine permissions across API 27–37
+- Null Island (0,0) coordinate filtering and Maidenhead QTH locator fallback preservation
+- Automated GitHub Actions CI workflow and 17 JVM unit tests
+- Code quality and Jetpack Compose lint fixes

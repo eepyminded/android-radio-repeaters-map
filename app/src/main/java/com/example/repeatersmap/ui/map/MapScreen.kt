@@ -154,26 +154,25 @@ fun MapScreen(modifier: Modifier = Modifier) {
                 val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
                 val gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
                 val networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+                val fusedEnabled = locationManager.isProviderEnabled("fused")
 
                 val provider = when {
                     hasFine && gpsEnabled -> LocationManager.GPS_PROVIDER
+                    fusedEnabled -> "fused"
                     networkEnabled -> LocationManager.NETWORK_PROVIDER
                     else -> null
                 }
 
                 if (provider == null) {
-                    showSingleToast(context, "Fine location on GPS was denied.")
+                    showSingleToast(context, "Please enable location services (GPS or Wi-Fi scanning) in phone settings.")
                     return
                 }
 
                 val lastLocation = try {
                     val gpsLoc = if (hasFine && gpsEnabled) locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) else null
+                    val fusedLoc = if (fusedEnabled) locationManager.getLastKnownLocation("fused") else null
                     val netLoc = if (networkEnabled) locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER) else null
-                    when {
-                        gpsLoc != null && netLoc != null -> if (gpsLoc.time > netLoc.time) gpsLoc else netLoc
-                        gpsLoc != null -> gpsLoc
-                        else -> netLoc
-                    }
+                    listOfNotNull(gpsLoc, fusedLoc, netLoc).maxByOrNull { it.time }
                 } catch (e: SecurityException) {
                     null
                 }
@@ -247,7 +246,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
             try {
                 val repeaters = RepeaterRepository.loadRepeatersFromAssets(context)
                 withContext(Dispatchers.Main) {
-                    allRepeaters = repeaters
+                    allRepeaters = repeaters.filter { it.isValid }
                     isLoadingData = false
                     if (repeaters.isEmpty()) {
                         loadError = "No repeater data found in asset dataset."
@@ -285,7 +284,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
 
     val repeatersGeoJsonData = remember(allRepeaters) {
         val features = allRepeaters.mapNotNull { item ->
-            if (item.coordinates.size >= 2) {
+            if (item.hasValidCoordinates) {
                 Feature(
                     geometry = Point(
                         Position(
@@ -343,6 +342,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
             }
         }
     ) { innerPadding ->
+        // contents on the map
         if (showBottomSheet) {
             ModalBottomSheet(
                 onDismissRequest = {
@@ -399,7 +399,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
                 }
             }
         }
-        Box(modifier = modifier) {
+        Box(modifier = modifier.padding(innerPadding)) {
             MaplibreMap(
                 cameraState = camera,
                 options = MapOptions(
