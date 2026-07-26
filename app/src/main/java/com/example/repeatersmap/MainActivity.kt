@@ -92,7 +92,9 @@ fun MainStructure(modifier: Modifier = Modifier) {
                     onClick = {
                         scope.launch { drawerState.close() }
                         navController.navigate("repeaters_screen") {
-                            popUpTo("repeaters_screen") { inclusive = true }
+                            popUpTo("repeaters_screen") { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
                         }
                     }
                 )
@@ -102,7 +104,11 @@ fun MainStructure(modifier: Modifier = Modifier) {
                     icon = { Icon(Icons.Default.Menu, contentDescription = null) },
                     onClick = {
                         scope.launch { drawerState.close() }
-                        navController.navigate("info_screen")
+                        navController.navigate("info_screen") {
+                            popUpTo("repeaters_screen") { saveState = true }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
                 )
             }

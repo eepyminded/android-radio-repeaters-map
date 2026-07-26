@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -39,11 +40,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -115,29 +118,13 @@ private fun showSingleToast(context: Context, message: String, duration: Int = T
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MapScreen(modifier: Modifier = Modifier) {
+fun MapScreen(
+    modifier: Modifier = Modifier,
+    viewModel: MapViewModel = viewModel()
+) {
     val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
+    val uiState by viewModel.uiState.collectAsState()
     val antennaIcon = painterResource(R.drawable.antenna_icon)
-
-    var userPosition by remember { mutableStateOf<Position?>(null) }
-
-    var allRepeaters by remember { mutableStateOf<List<RepeaterItem>>(emptyList()) }
-    var selectedRepeater by remember { mutableStateOf<RepeaterItem?>(null) }
-
-    var checkedWorking by remember { mutableStateOf(true) }
-    var checkedStopped by remember { mutableStateOf(true) }
-    var checkedPlanned by remember { mutableStateOf(true) }
-    var checkedTesting by remember { mutableStateOf(true) }
-    var checkedBuilding by remember { mutableStateOf(true) }
-    var checkedUnverified by remember { mutableStateOf(true) }
-
-    var checked23cm by remember { mutableStateOf(true) }
-    var checked70cm by remember { mutableStateOf(true) }
-    var checked2m by remember { mutableStateOf(true) }
-    var checked4m by remember { mutableStateOf(true) }
-    var checked6m by remember { mutableStateOf(true) }
-    var checked10m by remember { mutableStateOf(true) }
 
     val camera = rememberCameraState(
         firstPosition = CameraPosition(
@@ -146,119 +133,34 @@ fun MapScreen(modifier: Modifier = Modifier) {
         )
     )
 
-    fun fetchUserLocation() {
-        try {
-            val hasFine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-            val hasCoarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-            if (hasFine || hasCoarse) {
-                val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                val gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                val networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
-                val fusedEnabled = locationManager.isProviderEnabled("fused")
-
-                val provider = when {
-                    hasFine && gpsEnabled -> LocationManager.GPS_PROVIDER
-                    fusedEnabled -> "fused"
-                    networkEnabled -> LocationManager.NETWORK_PROVIDER
-                    else -> null
-                }
-
-                if (provider == null) {
-                    showSingleToast(context, "Please enable location services (GPS or Wi-Fi scanning) in phone settings.")
-                    return
-                }
-
-                val lastLocation = try {
-                    val gpsLoc = if (hasFine && gpsEnabled) locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) else null
-                    val fusedLoc = if (fusedEnabled) locationManager.getLastKnownLocation("fused") else null
-                    val netLoc = if (networkEnabled) locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER) else null
-                    listOfNotNull(gpsLoc, fusedLoc, netLoc).maxByOrNull { it.time }
-                } catch (e: SecurityException) {
-                    null
-                }
-
-                if (lastLocation != null) {
-                    val pos = Position(longitude = lastLocation.longitude, latitude = lastLocation.latitude)
-                    userPosition = pos
-                    coroutineScope.launch {
-                        camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
-                    }
-                } else {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                        locationManager.getCurrentLocation(
-                            provider,
-                            null,
-                            ContextCompat.getMainExecutor(context)
-                        ) { freshLocation ->
-                            if (freshLocation != null) {
-                                val pos = Position(longitude = freshLocation.longitude, latitude = freshLocation.latitude)
-                                userPosition = pos
-                                coroutineScope.launch {
-                                    camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
-                                }
-                            } else {
-                                showSingleToast(context, "Location unavailable. Please check if GPS is enabled.")
-                            }
-                        }
-                    } else {
-                        @Suppress("DEPRECATION")
-                        locationManager.requestSingleUpdate(
-                            provider,
-                            { freshLocation ->
-                                val pos = Position(longitude = freshLocation.longitude, latitude = freshLocation.latitude)
-                                userPosition = pos
-                                coroutineScope.launch {
-                                    camera.animateTo(CameraPosition(target = pos, zoom = 12.0))
-                                }
-                            },
-                            android.os.Looper.getMainLooper()
-                        )
-                    }
-                }
-            } else {
-                showSingleToast(context, "Location permission denied. Please enable location in Android Settings.", Toast.LENGTH_LONG)
-            }
-        } catch (e: Exception) {
-            Log.e("MAP_LOCATION", "Error acquiring user location", e)
-            showSingleToast(context, "Unable to access location services.")
-        }
-    }
-
     val permissionLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestMultiplePermissions()
     ) { permissions ->
         val isGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
                 permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
-        if (isGranted) {
-            fetchUserLocation()
-        } else {
-            showSingleToast(context, "Location permission denied. Please enable location in Android Settings.", Toast.LENGTH_LONG)
-        }
+        viewModel.onPermissionResult(isGranted)
     }
 
-    var isLoadingData by remember { mutableStateOf(true) }
-    var loadError by remember { mutableStateOf<String?>(null) }
+    LaunchedEffect(viewModel) {
+        viewModel.uiEvents.collect { event ->
+            when (event) {
+                is MapUiEvent.ShowToast -> showSingleToast(context, event.message, Toast.LENGTH_LONG)
+                is MapUiEvent.AnimateCamera -> camera.animateTo(CameraPosition(target = event.position, zoom = event.zoom))
+                is MapUiEvent.RequestLocationPermission -> {
+                    permissionLauncher.launch(
+                        arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+                    )
+                }
+            }
+        }
+    }
 
     val offlineManager = rememberOfflineManager()
 
     LaunchedEffect(Unit) {
-        withContext(Dispatchers.IO) {
-            try {
-                val repeaters = RepeaterRepository.loadRepeatersFromAssets(context)
-                withContext(Dispatchers.Main) {
-                    allRepeaters = repeaters.filter { it.isValid }
-                    isLoadingData = false
-                    if (repeaters.isEmpty()) {
-                        loadError = "No repeater data found in asset dataset."
-                    }
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    isLoadingData = false
-                    loadError = e.message ?: "Failed to parse repeater dataset."
-                }
-            }
-        }
         try {
             if (offlineManager.packs.isEmpty()) {
                 val polandBounds = BoundingBox(
@@ -282,32 +184,11 @@ fun MapScreen(modifier: Modifier = Modifier) {
         }
     }
 
-    val repeatersGeoJsonData = remember(allRepeaters) {
-        val features = allRepeaters.mapNotNull { item ->
-            if (item.hasValidCoordinates) {
-                Feature(
-                    geometry = Point(
-                        Position(
-                            longitude = item.coordinates[1],
-                            latitude = item.coordinates[0]
-                        )
-                    ),
-                    properties = buildJsonObject {
-                        put("name", item.callsign)
-                        put("tx_freq", item.tx_frequency)
-                        put("rx_freq", item.rx_frequency)
-                        put("status", item.status)
-                    }
-                )
-            } else null
-        }
-        FeatureCollection(features).toJson()
-    }
-
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold(
+        contentWindowInsets = WindowInsets(0, 0, 0, 0),
         floatingActionButton = {
             Column(
                 horizontalAlignment = Alignment.End,
@@ -317,16 +198,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
                     onClick = {
                         val hasFine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
                         val hasCoarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
-                        if (hasFine || hasCoarse) {
-                            fetchUserLocation()
-                        } else {
-                            permissionLauncher.launch(
-                                arrayOf(
-                                    Manifest.permission.ACCESS_FINE_LOCATION,
-                                    Manifest.permission.ACCESS_COARSE_LOCATION
-                                )
-                            )
-                        }
+                        viewModel.onMyLocationClicked(hasFine || hasCoarse)
                     },
                     containerColor = MaterialTheme.colorScheme.secondaryContainer,
                     contentColor = MaterialTheme.colorScheme.onSecondaryContainer
@@ -342,7 +214,6 @@ fun MapScreen(modifier: Modifier = Modifier) {
             }
         }
     ) { innerPadding ->
-        // contents on the map
         if (showBottomSheet) {
             ModalBottomSheet(
                 onDismissRequest = {
@@ -367,12 +238,12 @@ fun MapScreen(modifier: Modifier = Modifier) {
                         contentPadding = PaddingValues(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        item { FilteringButton(checkedWorking, "working", { checkedWorking = !checkedWorking }) }
-                        item { FilteringButton(checkedStopped, "turned off", { checkedStopped = !checkedStopped }) }
-                        item { FilteringButton(checkedPlanned, "planned", { checkedPlanned = !checkedPlanned }) }
-                        item { FilteringButton(checkedTesting, "testing", { checkedTesting = !checkedTesting }) }
-                        item { FilteringButton(checkedBuilding, "being built", { checkedBuilding = !checkedBuilding }) }
-                        item { FilteringButton(checkedUnverified, "unverified", { checkedUnverified = !checkedUnverified }) }
+                        item { FilteringButton(uiState.filters.working, "working") { viewModel.updateFilters { it.copy(working = !it.working) } } }
+                        item { FilteringButton(uiState.filters.stopped, "turned off") { viewModel.updateFilters { it.copy(stopped = !it.stopped) } } }
+                        item { FilteringButton(uiState.filters.planned, "planned") { viewModel.updateFilters { it.copy(planned = !it.planned) } } }
+                        item { FilteringButton(uiState.filters.testing, "testing") { viewModel.updateFilters { it.copy(testing = !it.testing) } } }
+                        item { FilteringButton(uiState.filters.building, "being built") { viewModel.updateFilters { it.copy(building = !it.building) } } }
+                        item { FilteringButton(uiState.filters.unverified, "unverified") { viewModel.updateFilters { it.copy(unverified = !it.unverified) } } }
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -389,12 +260,12 @@ fun MapScreen(modifier: Modifier = Modifier) {
                         contentPadding = PaddingValues(horizontal = 16.dp),
                         horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
-                        item { FilteringButton(checked23cm, "23cm", { checked23cm = !checked23cm }) }
-                        item { FilteringButton(checked70cm, "70cm", { checked70cm = !checked70cm }) }
-                        item { FilteringButton(checked2m, "2m", { checked2m = !checked2m }) }
-                        item { FilteringButton(checked4m, "4m", { checked4m = !checked4m }) }
-                        item { FilteringButton(checked6m, "6m", { checked6m = !checked6m }) }
-                        item { FilteringButton(checked10m, "10m", { checked10m = !checked10m }) }
+                        item { FilteringButton(uiState.filters.cm23, "23cm") { viewModel.updateFilters { it.copy(cm23 = !it.cm23) } } }
+                        item { FilteringButton(uiState.filters.cm70, "70cm") { viewModel.updateFilters { it.copy(cm70 = !it.cm70) } } }
+                        item { FilteringButton(uiState.filters.m2, "2m") { viewModel.updateFilters { it.copy(m2 = !it.m2) } } }
+                        item { FilteringButton(uiState.filters.m4, "4m") { viewModel.updateFilters { it.copy(m4 = !it.m4) } } }
+                        item { FilteringButton(uiState.filters.m6, "6m") { viewModel.updateFilters { it.copy(m6 = !it.m6) } } }
+                        item { FilteringButton(uiState.filters.m10, "10m") { viewModel.updateFilters { it.copy(m10 = !it.m10) } } }
                     }
                 }
             }
@@ -411,35 +282,35 @@ fun MapScreen(modifier: Modifier = Modifier) {
                 baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty")
             ) {
                 val repeaterSource = rememberGeoJsonSource(
-                    data = GeoJsonData.JsonString(repeatersGeoJsonData)
+                    data = GeoJsonData.JsonString(uiState.repeatersGeoJson)
                 )
 
                 val statusFilters = mutableListOf<Expression<BooleanValue>>().apply {
-                    if (checkedWorking) add(feature["status"].asString().eq(const("working")))
-                    if (checkedStopped) add(feature["status"].asString().eq(const("off")))
-                    if (checkedPlanned) add(feature["status"].asString().eq(const("planned")))
-                    if (checkedTesting) add(feature["status"].asString().eq(const("testing")))
-                    if (checkedBuilding) add(feature["status"].asString().eq(const("inprogress")))
-                    if (checkedUnverified) add(feature["status"].asString().eq(const("unverified")))
+                    if (uiState.filters.working) add(feature["status"].asString().eq(const("working")))
+                    if (uiState.filters.stopped) add(feature["status"].asString().eq(const("off")))
+                    if (uiState.filters.planned) add(feature["status"].asString().eq(const("planned")))
+                    if (uiState.filters.testing) add(feature["status"].asString().eq(const("testing")))
+                    if (uiState.filters.building) add(feature["status"].asString().eq(const("inprogress")))
+                    if (uiState.filters.unverified) add(feature["status"].asString().eq(const("unverified")))
                 }
 
                 val frequencyFilters = mutableListOf<Expression<BooleanValue>>().apply {
-                    if (checked23cm) {
+                    if (uiState.filters.cm23) {
                         add(feature["tx_freq"].asNumber().gt(const(1240.0f)).and(feature["tx_freq"].asNumber().lt(const(1300.0f))).and(feature["rx_freq"].asNumber().gt(const(1240.0f)).and(feature["rx_freq"].asNumber().lt(const(1300.0f)))))
                     }
-                    if (checked70cm) {
+                    if (uiState.filters.cm70) {
                         add(feature["tx_freq"].asNumber().gt(const(420.0f)).and(feature["tx_freq"].asNumber().lt(const(450.0f))).and(feature["rx_freq"].asNumber().gt(const(420.0f)).and(feature["rx_freq"].asNumber().lt(const(450.0f)))))
                     }
-                    if (checked2m) {
+                    if (uiState.filters.m2) {
                         add(feature["tx_freq"].asNumber().gt(const(144.0f)).and(feature["tx_freq"].asNumber().lt(const(146.0f))).and(feature["rx_freq"].asNumber().gt(const(144.0f)).and(feature["rx_freq"].asNumber().lt(const(146.0f)))))
                     }
-                    if (checked4m) {
+                    if (uiState.filters.m4) {
                         add(feature["tx_freq"].asNumber().gt(const(70.0f)).and(feature["tx_freq"].asNumber().lt(const(70.5f))).and(feature["rx_freq"].asNumber().gt(const(70.0f)).and(feature["rx_freq"].asNumber().lt(const(70.5f)))))
                     }
-                    if (checked6m) {
+                    if (uiState.filters.m6) {
                         add(feature["tx_freq"].asNumber().gt(const(50.0f)).and(feature["tx_freq"].asNumber().lt(const(52.0f))).and(feature["rx_freq"].asNumber().gt(const(50.0f)).and(feature["rx_freq"].asNumber().lt(const(52.0f)))))
                     }
-                    if (checked10m) {
+                    if (uiState.filters.m10) {
                         add(feature["tx_freq"].asNumber().gt(const(28.0f)).and(feature["tx_freq"].asNumber().lt(const(29.7f))).and(feature["rx_freq"].asNumber().gt(const(28.0f)).and(feature["rx_freq"].asNumber().lt(const(29.7f)))))
                     }
                 }
@@ -471,13 +342,13 @@ fun MapScreen(modifier: Modifier = Modifier) {
                     onClick = { features ->
                         val name = features.firstOrNull()?.properties?.get("name")?.jsonPrimitive?.content
                         if (name != null) {
-                            selectedRepeater = allRepeaters.find { it.callsign == name }
+                            viewModel.selectRepeater(name)
                         }
                         ClickResult.Consume
                     }
                 )
 
-                userPosition?.let { pos ->
+                uiState.userPosition?.let { pos ->
                     val userGeoJson = remember(pos) {
                         FeatureCollection(
                             listOf(
@@ -525,7 +396,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
                 }
             }
 
-            if (isLoadingData) {
+            if (uiState.isLoading) {
                 ElevatedCard(
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -560,7 +431,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
                         }
                     }
                 }
-            } else if (loadError != null || allRepeaters.isEmpty()) {
+            } else if (uiState.errorMessage != null || uiState.allRepeaters.isEmpty()) {
                 ElevatedCard(
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -582,7 +453,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
                             color = MaterialTheme.colorScheme.onErrorContainer
                         )
                         Text(
-                            text = loadError ?: "No repeaters found in dataset.",
+                            text = uiState.errorMessage ?: "No repeaters found in dataset.",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onErrorContainer
                         )
@@ -590,7 +461,7 @@ fun MapScreen(modifier: Modifier = Modifier) {
                 }
             }
 
-            selectedRepeater?.let { item ->
+            uiState.selectedRepeater?.let { item ->
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -598,11 +469,11 @@ fun MapScreen(modifier: Modifier = Modifier) {
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = null
-                        ) { selectedRepeater = null }
+                        ) { viewModel.clearSelectedRepeater() }
                 ) {
                     CustomInfoWindow(
                         repeater = item,
-                        onClose = { selectedRepeater = null },
+                        onClose = { viewModel.clearSelectedRepeater() },
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
