@@ -1,0 +1,4 @@
+Version 0.0.3.5:
+- Fixed an issue where the map screen rendered smaller than the allowed space
+- Rewrote application logic to use ViewModel for robust state management
+- Added additional test coverage

@@ -17,8 +17,8 @@ android {
         minSdk = 27
         targetSdk = 36
 
-        versionCode = 6
-        versionName = "0.0.3.4"
+        versionCode = 7
+        versionName = "0.0.3.5"
 
         val baseCode = versionCode ?: 5
         val targetAbi = project.findProperty("targetAbi") as String?
