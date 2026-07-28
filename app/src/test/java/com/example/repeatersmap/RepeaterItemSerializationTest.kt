@@ -191,4 +191,34 @@ class RepeaterItemSerializationTest {
         assertEquals(false, itemZeroMaiden.hasValidCoordinates)
         assertEquals(true, itemZeroMaiden.isValid)
     }
+
+    @Test
+    fun `test actual assets json file parses successfully`() {
+        val file = java.io.File("src/main/assets/przemienniki.eu.json")
+        
+        val jsonString = file.readText()
+
+        val items: List<RepeaterItem> = jsonParser.decodeFromString(jsonString)
+
+        // regression, if 500 or more arevalid its fine to pass
+        org.junit.Assert.assertTrue(
+            "JSON file should contain at least 500 repeaters (found ${items.size})", 
+            items.size > 500
+        )
+        
+        // SR6ACZ needs to persist no matter what,
+        val hasSRACZ = items.any { it.callsign == "SR6ACZ" }
+        org.junit.Assert.assertTrue("SR6ACZ repeater is there", hasSRACZ)
+        
+        // if 90% of coords are valid let it pass
+        val validCount = items.count { it.isValid }
+        val validPercentage = validCount.toDouble() / items.size
+
+        println("total items valid: ${items.size}, percentage valid: ${String.format("%.2f", validPercentage * 100)}%")
+
+        org.junit.Assert.assertTrue(
+            "At least 90% of repeaters should be valid (was ${String.format("%.2f", validPercentage * 100)}%)", 
+            validPercentage > 0.90
+        )
+    }
 }
