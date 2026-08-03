@@ -1,0 +1,2 @@
+- Updated project to use Java 21 compiler and JVM targets
+- Updated GitHub CI workflows to use Java 21 (Temurin)
