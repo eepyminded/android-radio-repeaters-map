@@ -88,6 +88,27 @@ fun InfoScreen(modifier: Modifier = Modifier) {
                     )
                 }
             )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Text(
+                text = buildAnnotatedString {
+                    append("Elevation data provided by ")
+                    withLink(
+                        LinkAnnotation.Url(
+                            "https://open-meteo.com/",
+                            TextLinkStyles(style = SpanStyle(color = Color.Blue))
+                        ),
+                        {
+                            append("Open-Meteo.com")
+                        }
+                    )
+                    append(" under CC-BY 4.0.")
+                },
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center
+            )
         }
     }
 }

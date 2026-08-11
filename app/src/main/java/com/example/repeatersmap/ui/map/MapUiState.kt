@@ -18,6 +18,14 @@ data class RepeaterFilters(
     val m10: Boolean = true
 )
 
+data class ElevationProfile(
+    val points: List<Double>,
+    val repeater: RepeaterItem,
+    val totalDistanceMeters: Double,
+    val userAntennaHeight: Float = 2f,
+    val repeaterAntennaHeight: Float = 30f
+)
+
 data class MapUiState(
     val isLoading: Boolean = true,
     val errorMessage: String? = null,
@@ -25,7 +33,9 @@ data class MapUiState(
     val selectedRepeater: RepeaterItem? = null,
     val userPosition: Position? = null,
     val filters: RepeaterFilters = RepeaterFilters(),
-    val repeatersGeoJson: String = "{\"type\":\"FeatureCollection\",\"features\":[]}"
+    val repeatersGeoJson: String = "{\"type\":\"FeatureCollection\",\"features\":[]}",
+    val elevationProfile: ElevationProfile? = null,
+    val isElevationLoading: Boolean = false
 )
 
 sealed interface MapUiEvent {

@@ -23,17 +23,20 @@ import org.maplibre.spatialk.geojson.FeatureCollection
 import org.maplibre.spatialk.geojson.Point
 import org.maplibre.spatialk.geojson.Position
 import org.maplibre.spatialk.geojson.toJson
+import com.example.repeatersmap.data.repository.ElevationRepository
 
 class MapViewModel(
     application: Application,
     private val repository: RepeaterRepository,
-    private val locationTracker: LocationTracker
+    private val locationTracker: LocationTracker,
+    private val elevationRepository: ElevationRepository = ElevationRepository()
 ) : AndroidViewModel(application) {
 
     constructor(application: Application) : this(
         application = application,
         repository = RepeaterRepository,
-        locationTracker = LocationTracker(application)
+        locationTracker = LocationTracker(application),
+        elevationRepository = ElevationRepository()
     )
 
     private val _uiState = MutableStateFlow(MapUiState())
@@ -137,5 +140,66 @@ class MapViewModel(
 
     fun updateFilters(transform: (RepeaterFilters) -> RepeaterFilters) {
         _uiState.update { it.copy(filters = transform(it.filters)) }
+    }
+
+    fun calculateElevationProfile(repeater: RepeaterItem) {
+        val userPos = _uiState.value.userPosition
+        if (userPos == null) {
+            viewModelScope.launch {
+                _uiEvents.emit(MapUiEvent.ShowToast("Please enable GPS first."))
+            }
+            return
+        }
+
+        if (!repeater.hasValidCoordinates) {
+            viewModelScope.launch {
+                _uiEvents.emit(MapUiEvent.ShowToast("Repeater has no valid coordinates."))
+            }
+            return
+        }
+
+        viewModelScope.launch {
+            _uiState.update { it.copy(isElevationLoading = true, elevationProfile = null) }
+            try {
+                val repeaterPos = Position(longitude = repeater.coordinates[1], latitude = repeater.coordinates[0])
+                val points = elevationRepository.calculatePathPoints(start = userPos, end = repeaterPos, maxPoints = 100)
+                val heights = elevationRepository.getElevationProfile(points)
+                val totalDistance = elevationRepository.calculateDistanceMeters(userPos, repeaterPos)
+                
+                _uiState.update { it.copy(
+                    isElevationLoading = false,
+                    elevationProfile = ElevationProfile(
+                        points = heights,
+                        repeater = repeater,
+                        totalDistanceMeters = totalDistance
+                    )
+                ) }
+            } catch (e: Exception) {
+                _uiState.update { it.copy(isElevationLoading = false) }
+                _uiEvents.emit(MapUiEvent.ShowToast("Failed to fetch elevation: ${e.message}"))
+            }
+        }
+    }
+
+    fun clearElevationProfile() {
+        _uiState.update { it.copy(elevationProfile = null, isElevationLoading = false) }
+    }
+
+    fun updateUserAntennaHeight(height: Float) {
+        _uiState.update { state ->
+            val profile = state.elevationProfile
+            if (profile != null) {
+                state.copy(elevationProfile = profile.copy(userAntennaHeight = height))
+            } else state
+        }
+    }
+
+    fun updateRepeaterAntennaHeight(height: Float) {
+        _uiState.update { state ->
+            val profile = state.elevationProfile
+            if (profile != null) {
+                state.copy(elevationProfile = profile.copy(repeaterAntennaHeight = height))
+            } else state
+        }
     }
 }

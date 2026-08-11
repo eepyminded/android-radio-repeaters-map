@@ -41,6 +41,7 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
 - **[MapLibre Compose](https://github.com/maplibre/maplibre-compose):** Open-source vector map SDK for Jetpack Compose.
 - **[OpenFreeMap](https://openfreemap.org) & [OpenStreetMap](https://www.openstreetmap.org/copyright):** Map tile rendering and map data (© OpenStreetMap contributors).
 - **Wojtek Jakieła SQ8W ([przemienniki.eu](https://przemienniki.eu)):** Comprehensive dataset of Polish amateur radio repeaters.
+- **[Open-Meteo](https://open-meteo.com/):** Elevation data for the Line of Sight profile (provided under CC-BY 4.0).
 
 ## 📜 License
 

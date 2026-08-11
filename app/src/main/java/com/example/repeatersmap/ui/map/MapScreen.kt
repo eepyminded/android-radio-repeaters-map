@@ -54,6 +54,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import android.content.Context
 import android.os.Build
@@ -63,6 +64,7 @@ import com.example.repeatersmap.R
 import com.example.repeatersmap.data.model.RepeaterItem
 import com.example.repeatersmap.data.repository.RepeaterRepository
 import com.example.repeatersmap.ui.components.CustomInfoWindow
+import com.example.repeatersmap.ui.components.ElevationProfileGraph
 import com.example.repeatersmap.ui.components.FilteringButton
 import com.example.repeatersmap.ui.components.fadingEdge
 import kotlinx.coroutines.Dispatchers
@@ -281,46 +283,54 @@ fun MapScreen(
                 ),
                 baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty")
             ) {
+                // cache geojson parsing to prevent map flickering
+                val geoJsonData = remember(uiState.repeatersGeoJson) {
+                    GeoJsonData.JsonString(uiState.repeatersGeoJson)
+                }
                 val repeaterSource = rememberGeoJsonSource(
-                    data = GeoJsonData.JsonString(uiState.repeatersGeoJson)
+                    data = geoJsonData
                 )
 
-                val statusFilters = mutableListOf<Expression<BooleanValue>>().apply {
-                    if (uiState.filters.working) add(feature["status"].asString().eq(const("working")))
-                    if (uiState.filters.stopped) add(feature["status"].asString().eq(const("off")))
-                    if (uiState.filters.planned) add(feature["status"].asString().eq(const("planned")))
-                    if (uiState.filters.testing) add(feature["status"].asString().eq(const("testing")))
-                    if (uiState.filters.building) add(feature["status"].asString().eq(const("inprogress")))
-                    if (uiState.filters.unverified) add(feature["status"].asString().eq(const("unverified")))
-                }
+                // cache filters to prevent continuous re-evaluation
+                val finalFilter = remember(uiState.filters) {
+                    val statusFilters = mutableListOf<Expression<BooleanValue>>().apply {
+                        if (uiState.filters.working) add(feature["status"].asString().eq(const("working")))
+                        if (uiState.filters.stopped) add(feature["status"].asString().eq(const("off")))
+                        if (uiState.filters.planned) add(feature["status"].asString().eq(const("planned")))
+                        if (uiState.filters.testing) add(feature["status"].asString().eq(const("testing")))
+                        if (uiState.filters.building) add(feature["status"].asString().eq(const("inprogress")))
+                        if (uiState.filters.unverified) add(feature["status"].asString().eq(const("unverified")))
+                    }
 
-                val frequencyFilters = mutableListOf<Expression<BooleanValue>>().apply {
-                    if (uiState.filters.cm23) {
-                        add(feature["tx_freq"].asNumber().gt(const(1240.0f)).and(feature["tx_freq"].asNumber().lt(const(1300.0f))).and(feature["rx_freq"].asNumber().gt(const(1240.0f)).and(feature["rx_freq"].asNumber().lt(const(1300.0f)))))
+                    val frequencyFilters = mutableListOf<Expression<BooleanValue>>().apply {
+                        if (uiState.filters.cm23) {
+                            add(feature["tx_freq"].asNumber().gt(const(1240.0f)).and(feature["tx_freq"].asNumber().lt(const(1300.0f))).and(feature["rx_freq"].asNumber().gt(const(1240.0f)).and(feature["rx_freq"].asNumber().lt(const(1300.0f)))))
+                        }
+                        if (uiState.filters.cm70) {
+                            add(feature["tx_freq"].asNumber().gt(const(420.0f)).and(feature["tx_freq"].asNumber().lt(const(450.0f))).and(feature["rx_freq"].asNumber().gt(const(420.0f)).and(feature["rx_freq"].asNumber().lt(const(450.0f)))))
+                        }
+                        if (uiState.filters.m2) {
+                            add(feature["tx_freq"].asNumber().gt(const(144.0f)).and(feature["tx_freq"].asNumber().lt(const(146.0f))).and(feature["rx_freq"].asNumber().gt(const(144.0f)).and(feature["rx_freq"].asNumber().lt(const(146.0f)))))
+                        }
+                        if (uiState.filters.m4) {
+                            add(feature["tx_freq"].asNumber().gt(const(70.0f)).and(feature["tx_freq"].asNumber().lt(const(70.5f))).and(feature["rx_freq"].asNumber().gt(const(70.0f)).and(feature["rx_freq"].asNumber().lt(const(70.5f)))))
+                        }
+                        if (uiState.filters.m6) {
+                            add(feature["tx_freq"].asNumber().gt(const(50.0f)).and(feature["tx_freq"].asNumber().lt(const(52.0f))).and(feature["rx_freq"].asNumber().gt(const(50.0f)).and(feature["rx_freq"].asNumber().lt(const(52.0f)))))
+                        }
+                        if (uiState.filters.m10) {
+                            add(feature["tx_freq"].asNumber().gt(const(28.0f)).and(feature["tx_freq"].asNumber().lt(const(29.7f))).and(feature["rx_freq"].asNumber().gt(const(28.0f)).and(feature["rx_freq"].asNumber().lt(const(29.7f)))))
+                        }
                     }
-                    if (uiState.filters.cm70) {
-                        add(feature["tx_freq"].asNumber().gt(const(420.0f)).and(feature["tx_freq"].asNumber().lt(const(450.0f))).and(feature["rx_freq"].asNumber().gt(const(420.0f)).and(feature["rx_freq"].asNumber().lt(const(450.0f)))))
+                    
+                    if (statusFilters.isEmpty() || frequencyFilters.isEmpty()) {
+                        const(false)
+                    } else {
+                        all(
+                            any(*statusFilters.toTypedArray()),
+                            any(*frequencyFilters.toTypedArray())
+                        )
                     }
-                    if (uiState.filters.m2) {
-                        add(feature["tx_freq"].asNumber().gt(const(144.0f)).and(feature["tx_freq"].asNumber().lt(const(146.0f))).and(feature["rx_freq"].asNumber().gt(const(144.0f)).and(feature["rx_freq"].asNumber().lt(const(146.0f)))))
-                    }
-                    if (uiState.filters.m4) {
-                        add(feature["tx_freq"].asNumber().gt(const(70.0f)).and(feature["tx_freq"].asNumber().lt(const(70.5f))).and(feature["rx_freq"].asNumber().gt(const(70.0f)).and(feature["rx_freq"].asNumber().lt(const(70.5f)))))
-                    }
-                    if (uiState.filters.m6) {
-                        add(feature["tx_freq"].asNumber().gt(const(50.0f)).and(feature["tx_freq"].asNumber().lt(const(52.0f))).and(feature["rx_freq"].asNumber().gt(const(50.0f)).and(feature["rx_freq"].asNumber().lt(const(52.0f)))))
-                    }
-                    if (uiState.filters.m10) {
-                        add(feature["tx_freq"].asNumber().gt(const(28.0f)).and(feature["tx_freq"].asNumber().lt(const(29.7f))).and(feature["rx_freq"].asNumber().gt(const(28.0f)).and(feature["rx_freq"].asNumber().lt(const(29.7f)))))
-                    }
-                }
-                val finalFilter = if (statusFilters.isEmpty() || frequencyFilters.isEmpty()) {
-                    const(false)
-                } else {
-                    all(
-                        any(*statusFilters.toTypedArray()),
-                        any(*frequencyFilters.toTypedArray())
-                    )
                 }
 
                 CircleLayer(
@@ -343,6 +353,16 @@ fun MapScreen(
                         val name = features.firstOrNull()?.properties?.get("name")?.jsonPrimitive?.content
                         if (name != null) {
                             viewModel.selectRepeater(name)
+                        }
+                        ClickResult.Consume
+                    },
+                    onLongClick = { features ->
+                        val name = features.firstOrNull()?.properties?.get("name")?.jsonPrimitive?.content
+                        if (name != null) {
+                            val repeater = uiState.allRepeaters.find { it.callsign == name }
+                            if (repeater != null) {
+                                viewModel.calculateElevationProfile(repeater)
+                            }
                         }
                         ClickResult.Consume
                     }
@@ -476,6 +496,87 @@ fun MapScreen(
                         onClose = { viewModel.clearSelectedRepeater() },
                         modifier = Modifier.align(Alignment.Center)
                     )
+                }
+            }
+
+            if (uiState.isElevationLoading) {
+                ElevatedCard(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(bottom = 160.dp),
+                    shape = RoundedCornerShape(16.dp),
+                    colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh)
+                ) {
+                    Row(modifier = Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
+                        CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 2.dp)
+                        Text("Calculating Line of Sight.......", style = MaterialTheme.typography.bodyMedium)
+                    }
+                }
+            }
+
+            uiState.elevationProfile?.let { profile ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color.Black.copy(alpha = 0.3f))
+                        .clickable(
+                            interactionSource = remember { MutableInteractionSource() },
+                            indication = null
+                        ) { viewModel.clearElevationProfile() }
+                ) {
+                    ElevatedCard(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .padding(start = 16.dp, end = 16.dp, bottom = 160.dp)
+                            .fillMaxWidth()
+                            .height(280.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.elevatedCardColors(containerColor = MaterialTheme.colorScheme.surfaceContainer)
+                    ) {
+                        Box(modifier = Modifier.fillMaxSize()) {
+                            Column(modifier = Modifier.fillMaxSize().padding(8.dp)) {
+                                Text(
+                                    text = "Line of Sight: ${profile.repeater.callsign}",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    modifier = Modifier.padding(start = 8.dp)
+                                )
+                                
+                                ElevationProfileGraph(
+                                    points = profile.points,
+                                    totalDistanceMeters = profile.totalDistanceMeters,
+                                    frequencyMHz = profile.repeater.tx_frequency,
+                                    userAntennaHeight = profile.userAntennaHeight,
+                                    repeaterAntennaHeight = profile.repeaterAntennaHeight,
+                                    modifier = Modifier.fillMaxWidth().weight(1f)
+                                )
+                                
+                                // antenna height sliders
+                                androidx.compose.foundation.layout.Row(
+                                    modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
+                                    horizontalArrangement = Arrangement.SpaceBetween,
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
+                                        Text(text = "User Ant: ${profile.userAntennaHeight.toInt()}m", fontSize = 10.sp)
+                                        androidx.compose.material3.Slider(
+                                            value = profile.userAntennaHeight,
+                                            onValueChange = { viewModel.updateUserAntennaHeight(it) },
+                                            valueRange = 0f..50f
+                                        )
+                                    }
+                                    Column(modifier = Modifier.weight(1f).padding(start = 8.dp)) {
+                                        Text(text = "Rep Ant: ${profile.repeaterAntennaHeight.toInt()}m", fontSize = 10.sp)
+                                        androidx.compose.material3.Slider(
+                                            value = profile.repeaterAntennaHeight,
+                                            onValueChange = { viewModel.updateRepeaterAntennaHeight(it) },
+                                            valueRange = 0f..100f
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
