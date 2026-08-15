@@ -1,0 +1,4 @@
+- Renamed the application package
+- Added proper credits to the About screen
+- Fixed low contrast font bug in the About screen
+- Clarified focus on Polish amateur radio repeaters

@@ -1,4 +1,4 @@
-An interactive Android map application for radio operators to discover, search, filter, and inspect amateur radio repeaters.
+An interactive Android map application for radio operators to discover, search, filter, and inspect amateur radio repeaters in Poland.
 
 Features:
 - Dynamic vector map rendering powered by MapLibre Compose
@@ -8,3 +8,9 @@ Features:
 - User GPS location dot and accuracy overlay
 - Lightweight native location support (no Google Play Services required)
 - Detailed repeater info popups with callsign, transmit/receive frequencies, QTH location, and CTCSS tones
+
+Credits:
+- https://github.com/maplibre/maplibre-compose: Open-source vector map SDK for Jetpack Compose.
+- https://openfreemap.org & https://www.openstreetmap.org/copyright: Map tile rendering and map data (© OpenStreetMap contributors).
+- Wojtek Jakieła SQ8W from przemienniki.eu - Comprehensive dataset of Polish amateur radio repeaters.
+- https://open-meteo.com: Elevation data for the Line of Sight profile (provided under CC-BY 4.0).

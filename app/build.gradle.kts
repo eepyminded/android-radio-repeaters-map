@@ -7,18 +7,18 @@ plugins {
 }
 
 android {
-    namespace = "com.example.repeatersmap"
+    namespace = "systems.madi.repeatersmap"
     compileSdk {
         version = release(37)
     }
 
     defaultConfig {
-        applicationId = "com.example.repeatersmap"
+        applicationId = "systems.madi.repeatersmap"
         minSdk = 27
         targetSdk = 36
 
-        versionCode = 8
-        versionName = "0.0.3.6"
+        versionCode = 9
+        versionName = "0.0.4.0"
 
         val baseCode = versionCode ?: 5
         val targetAbi = project.findProperty("targetAbi") as String?
