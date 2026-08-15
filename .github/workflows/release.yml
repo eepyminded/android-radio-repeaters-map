@@ -52,16 +52,24 @@ jobs:
           for ABI in arm64-v8a armeabi-v7a x86 x86_64; do
             echo "Building APK for $ABI..."
 
-            ./gradlew clean assembleRelease -PtargetAbi=$ABI \
+            # 1. Build unsigned APK (for reproducibility checksum)
+            ./gradlew clean assembleRelease -PtargetAbi=$ABI
+
+            UNSIGNED_APK=$(find app/build/outputs/apk/release -name "*-unsigned.apk" | head -n 1)
+            if [ -n "$UNSIGNED_APK" ]; then
+              UNSIGNED_HASH=$(sha256sum "$UNSIGNED_APK" | awk '{print $1}')
+              echo "$UNSIGNED_HASH  android-radio-repeaters-map-${{ github.ref_name }}-$ABI-unsigned.apk" >> build/outputs/release-apk/unsigned_sha256sums.txt
+            else
+              echo "No unsigned APK found for $ABI, skipping unsigned hash."
+            fi
+
+            # 2. Build signed APK (using Gradle injected signing)
+            # We don't run `clean` here so it reuses the compiled outputs and only re-packages
+            ./gradlew assembleRelease -PtargetAbi=$ABI \
               -Pandroid.injected.signing.store.file="$(pwd)/release.keystore" \
               -Pandroid.injected.signing.store.password="$KEYSTORE_PASSWORD" \
               -Pandroid.injected.signing.key.alias="$KEY_ALIAS" \
               -Pandroid.injected.signing.key.password="$KEY_PASSWORD"
-
-            # Find the unsigned APK to compute its hash (useful for reproducibility verification)
-            UNSIGNED_APK=$(find app/build/outputs/apk/release -name "*.apk" | grep "unsigned" | head -n 1)
-            UNSIGNED_HASH=$(sha256sum "$UNSIGNED_APK" | awk '{print $1}')
-            echo "$UNSIGNED_HASH  android-radio-repeaters-map-${{ github.ref_name }}-$ABI-unsigned.apk" >> build/outputs/release-apk/unsigned_sha256sums.txt
 
             SIGNED_APK=$(find app/build/outputs/apk/release -name "*.apk" | grep -v "unsigned" | head -n 1)
             FINAL_APK="build/outputs/release-apk/android-radio-repeaters-map-${{ github.ref_name }}-$ABI.apk"
@@ -81,9 +89,12 @@ jobs:
 
           echo "" >> sha256sums.txt
           echo "--- Unsigned APK Checksums ---" >> sha256sums.txt
-          cat unsigned_sha256sums.txt >> sha256sums.txt
-
-          rm unsigned_sha256sums.txt
+          if [ -f unsigned_sha256sums.txt ]; then
+            cat unsigned_sha256sums.txt >> sha256sums.txt
+            rm unsigned_sha256sums.txt
+          else
+            echo "No unsigned APKs were generated." >> sha256sums.txt
+          fi
 
           cat sha256sums.txt
           echo "### 🔐 Release APK SHA-256 Checksums" >> $GITHUB_STEP_SUMMARY
