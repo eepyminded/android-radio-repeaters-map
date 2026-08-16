@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -126,15 +127,37 @@ class MapViewModel(
         }
     }
 
+    private var locationUpdatesJob: kotlinx.coroutines.Job? = null
+
     fun fetchUserLocation() {
-        viewModelScope.launch {
-            val location = locationTracker.getCurrentLocation()
-            if (location != null) {
-                _uiState.update { it.copy(userPosition = location) }
-                _uiEvents.emit(MapUiEvent.AnimateCamera(position = location, zoom = 12.0))
-            } else {
-                _uiEvents.emit(MapUiEvent.ShowToast("Location unavailable. Please check if GPS/location services are enabled."))
+        locationUpdatesJob?.cancel()
+        locationUpdatesJob = viewModelScope.launch {
+            var isFirstUpdate = true
+            var receivedUpdate = false
+            
+            // first attempt an immediate fetch so the UI doesnt hang waiting for the first GPS fix
+            val quickFix = locationTracker.getCurrentLocation()
+            if (quickFix != null) {
+                receivedUpdate = true
+                _uiState.update { it.copy(userPosition = quickFix) }
+                _uiEvents.emit(MapUiEvent.AnimateCamera(position = quickFix, zoom = 12.0))
+                isFirstUpdate = false
             }
+
+            locationTracker.getLocationFlow()
+                .onCompletion {
+                    if (!receivedUpdate) {
+                        _uiEvents.emit(MapUiEvent.ShowToast("Location unavailable. Please check if GPS/location services are enabled."))
+                    }
+                }
+                .collect { location ->
+                    receivedUpdate = true
+                    _uiState.update { it.copy(userPosition = location) }
+                    if (isFirstUpdate) {
+                        _uiEvents.emit(MapUiEvent.AnimateCamera(position = location, zoom = 12.0))
+                        isFirstUpdate = false
+                    }
+                }
         }
     }
 

@@ -86,7 +86,7 @@ class LocationTracker(private val context: Context) {
         }
     }
 
-    fun getLocationFlow(minTimeMs: Long = 2000L, minDistanceMeters: Float = 5f): Flow<Position> = callbackFlow {
+    fun getLocationFlow(minTimeMs: Long = 2000L, minDistanceMeters: Float = 2f): Flow<Position> = callbackFlow {
         val hasFine = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
         val hasCoarse = ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
 
