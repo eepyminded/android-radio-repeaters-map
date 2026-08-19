@@ -91,6 +91,9 @@ class MapViewModel(
                         put("tx_freq", item.tx_frequency)
                         put("rx_freq", item.rx_frequency)
                         put("status", item.status)
+                        if (item.country_code != null) {
+                            put("country_code", item.country_code)
+                        }
                     }
                 )
             } else null

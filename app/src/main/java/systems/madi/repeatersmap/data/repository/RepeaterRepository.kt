@@ -17,15 +17,43 @@ object RepeaterRepository {
                 .bufferedReader()
                 .use { it.readText() }
 
-            val jsonParser = Json {
-                ignoreUnknownKeys = true
-                isLenient = true
-                coerceInputValues = true
-            }
-            jsonParser.decodeFromString<List<RepeaterItem>>(jsonString)
+            parseRepeatersJson(jsonString)
         } catch (e: Exception) {
             Log.e("MAP_ERROR", "Error loading JSON dataset", e)
             emptyList()
         }
+    }
+
+    fun parseRepeatersJson(jsonString: String): List<RepeaterItem> {
+        val jsonParser = Json {
+            ignoreUnknownKeys = true
+            isLenient = true
+            coerceInputValues = true
+        }
+        val repeaters = jsonParser.decodeFromString<List<RepeaterItem>>(jsonString)
+        
+        var convertedCount = 0
+        val mappedRepeaters = repeaters.map { item ->
+            if (!item.hasValidCoordinates && item.hasValidLocator) {
+                val fallbackCoords = systems.madi.repeatersmap.util.QthLocatorConverter.convertToCoordinates(item.locator)
+                if (fallbackCoords != null) {
+                    convertedCount++
+                    item.copy(coordinates = fallbackCoords)
+                } else {
+                    item
+                }
+            } else {
+                item
+            }
+        }
+        
+        // Use println for unit tests if Log.d fails
+        try {
+            Log.d("MAP_DATASET", "Successfully loaded ${mappedRepeaters.size} repeaters. $convertedCount injected via Maidenhead fallback.")
+        } catch (e: Exception) {
+            println("Successfully loaded ${mappedRepeaters.size} repeaters. $convertedCount injected via Maidenhead fallback.")
+        }
+        
+        return mappedRepeaters
     }
 }

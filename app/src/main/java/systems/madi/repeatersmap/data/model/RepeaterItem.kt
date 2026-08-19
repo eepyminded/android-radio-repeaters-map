@@ -13,7 +13,8 @@ data class RepeaterItem(
     val tx_ctcss: JsonElement? = null,
     val rx_ctcss: JsonElement? = null,
     val qth: String? = null,
-    val locator: String? = null
+    val locator: String? = null,
+    val country_code: String? = null
 ) {
     // checks coordinates count, lat lon bounds, and ignores 0,0 placeholder
     val hasValidCoordinates: Boolean
