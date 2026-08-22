@@ -1,6 +1,6 @@
 # ⚠️ EARLY WIP! ⚠️
 
-# 🗺️ Android Radio Repeaters Map
+# 🗺️ Radio Repeaters Map
 
 <div align="center">
 
@@ -20,9 +20,6 @@ The Android Radio Repeaters Map is a mobile application built for Polish amateur
 -   🔍 **Filter Capabilities:** Filter repeaters by frequency band (23cm, 70cm, 2m, 4m, 6m, 10m) and operational status
 -   📍 **GPS Localization & Real-Time Location:** Automatically center on your position with smooth camera animations and live visual location
 -   📡 **Elevation & Path Loss Calculations:** Long-tap on any repeater marker to generate a Line of Sight profile and compute the Free Space Path Loss between your location and the repeater (also a Fresnel Zone visualizer, it's  not that useful but I left it be)
-
-## 🔧 TODO
--   🌍❓ **QTH Converter:** Add a feature to convert QTH locators (e.g., `KO02MM`) to coordinates in entries where latitude and longitude are missing, so they don't end up in the middle of the ocean
 
 ## 🖥️ Screenshots
 
