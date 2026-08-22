@@ -1,0 +1,2 @@
+- maidenhead QTH locator fallback support
+- added offline map styles

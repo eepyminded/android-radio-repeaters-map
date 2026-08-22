@@ -1,0 +1,1 @@
+{"version":8,"sources":{"world_fallback":{"type":"geojson","data":"asset://ne_50m_admin_0_countries.json"}},"layers":[{"id":"background","type":"background","paint":{"background-color":"#e0e6ed"}},{"id":"world-barebones-fill","type":"fill","source":"world_fallback","paint":{"fill-color":"#f8f4f0","fill-outline-color":"#d0d7e0"}}]}

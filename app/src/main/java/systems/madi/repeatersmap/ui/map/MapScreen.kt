@@ -39,6 +39,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -57,6 +58,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Build
 import android.location.LocationManager
 import androidx.core.location.LocationManagerCompat
@@ -162,6 +165,29 @@ fun MapScreen(
 
     val offlineManager = rememberOfflineManager()
 
+    var isOnline by remember { mutableStateOf(true) }
+    DisposableEffect(context) {
+        val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = cm.activeNetwork
+        val caps = cm.getNetworkCapabilities(network)
+        isOnline = caps?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+
+        val callback = object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: android.net.Network) { isOnline = true }
+            override fun onLost(network: android.net.Network) { isOnline = false }
+        }
+        cm.registerDefaultNetworkCallback(callback)
+
+        onDispose {
+            cm.unregisterNetworkCallback(callback)
+        }
+    }
+
+    val packCount = offlineManager.packs.size
+    LaunchedEffect(isOnline, packCount) {
+        val styleName = if (isOnline || packCount > 0) "style_liberty.json" else "style_fallback.json"
+        Log.i("MAP_STYLE", "Map style -> isOnline=$isOnline, cachedPacks=$packCount -> Loading $styleName")
+    }
     LaunchedEffect(Unit) {
         try {
             if (offlineManager.packs.isEmpty()) {
@@ -279,9 +305,13 @@ fun MapScreen(
                     gestureOptions = GestureOptions(
                         isRotateEnabled = false,
                         isTiltEnabled = false
-                    )
+                    ),
+                    ornamentOptions = org.maplibre.compose.map.OrnamentOptions.AllDisabled
                 ),
-                baseStyle = BaseStyle.Uri("https://tiles.openfreemap.org/styles/liberty")
+                baseStyle = BaseStyle.Uri(
+                    if (isOnline || offlineManager.packs.isNotEmpty()) "asset://style_liberty.json"
+                    else "asset://style_fallback.json"
+                )
             ) {
                 // cache geojson parsing to prevent map flickering
                 val geoJsonData = remember(uiState.repeatersGeoJson) {
