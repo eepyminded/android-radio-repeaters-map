@@ -307,11 +307,11 @@
         ],
         "tx_frequency": 439.1,
         "tx_ctcss": 110.9,
-        "rx_frequency": 431.1,
+        "rx_frequency": 431.5,
         "rx_ctcss": 110.9,
         "rx_1750": false,
         "duplex": "-",
-        "offset": 8,
+        "offset": 7.6,
         "status": "testing",
         "coordinates": [
             52.1448,
@@ -2690,7 +2690,7 @@
         "rx_1750": false,
         "duplex": "-",
         "offset": 7.6,
-        "status": "working",
+        "status": "off",
         "coordinates": [
             49.467423,
             20.554353
@@ -3249,7 +3249,7 @@
         "rx_1750": false,
         "duplex": "-",
         "offset": 7.6,
-        "status": "working",
+        "status": "off",
         "coordinates": [
             49.704911,
             20.402898
@@ -5321,9 +5321,9 @@
         "modes": [
             "c4fm"
         ],
-        "tx_frequency": 439.5,
+        "tx_frequency": 439.4,
         "tx_ctcss": 0,
-        "rx_frequency": 431.9,
+        "rx_frequency": 431.8,
         "rx_ctcss": 74.4,
         "rx_1750": false,
         "duplex": "-",
@@ -6803,7 +6803,7 @@
         "rx_1750": false,
         "duplex": "-",
         "offset": 0.6,
-        "status": "off",
+        "status": "working",
         "coordinates": [
             50.2569429,
             17.4288815
@@ -10955,7 +10955,7 @@
     {
         "callsign": "SR2MAL",
         "modes": [
-            "c4fm"
+            "fm"
         ],
         "tx_frequency": 439.0625,
         "tx_ctcss": false,
