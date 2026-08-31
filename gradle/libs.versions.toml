@@ -32,7 +32,7 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
-maplibre-compose = { module = "org.maplibre.compose:maplibre-compose", version = "0.14.0" }
+maplibre-compose = { module = "org.maplibre.compose:maplibre-compose", version = "0.15.0" }
 maplibre-spatialk-geojson = { module = "org.maplibre.spatialk:geojson", version.ref = "spatialkGeojson" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
