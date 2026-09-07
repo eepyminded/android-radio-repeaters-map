@@ -323,6 +323,7 @@
     {
         "callsign": "SR4BF",
         "modes": [
+            "c4fm",
             "dmr"
         ],
         "tx_frequency": 438.8,
@@ -337,7 +338,7 @@
             52.91684137827379,
             22.539237932560635
         ],
-        "qth": "",
+        "qth": "KO12GW",
         "locator": "KO12GW"
     },
     {
@@ -2566,7 +2567,7 @@
         "rx_1750": true,
         "duplex": "-",
         "offset": 7.6,
-        "status": "off",
+        "status": "working",
         "coordinates": [
             49.7533,
             19.7822
