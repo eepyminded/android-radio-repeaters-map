@@ -45,6 +45,15 @@ jobs:
       - name: Verify Compile
         run: ./gradlew assembleDebug --stacktrace
 
+      - name: Verify Native Binaries in APK
+        run: |
+          echo "Checking APK for required MapLibre native binaries..."
+          if ! unzip -l app/build/outputs/apk/debug/app-debug.apk | grep "libmaplibre-native-c.so"; then
+            echo "ERROR: Missing required libmaplibre-native-c.so in APK!"
+            exit 1
+          fi
+          echo "Native binaries verified successfully."
+
       - name: Upload Test Reports on failure
         if: failure()
         uses: actions/upload-artifact@v4

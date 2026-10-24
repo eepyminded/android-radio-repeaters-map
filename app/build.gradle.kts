@@ -85,6 +85,7 @@ tasks.whenTaskAdded {
 
 dependencies {
     implementation(libs.maplibre.compose)
+    runtimeOnly(libs.maplibre.compose.runtime.vulkan)
     implementation(libs.maplibre.spatialk.geojson)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icons.extended)

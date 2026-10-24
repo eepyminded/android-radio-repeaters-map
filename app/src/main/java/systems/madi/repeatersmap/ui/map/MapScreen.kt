@@ -60,26 +60,16 @@ import androidx.core.content.ContextCompat
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
-import android.location.LocationManager
-import androidx.core.location.LocationManagerCompat
 import systems.madi.repeatersmap.R
-import systems.madi.repeatersmap.data.model.RepeaterItem
-import systems.madi.repeatersmap.data.repository.RepeaterRepository
 import systems.madi.repeatersmap.ui.components.CustomInfoWindow
 import systems.madi.repeatersmap.ui.components.ElevationProfileGraph
 import systems.madi.repeatersmap.ui.components.FilteringButton
 import systems.madi.repeatersmap.ui.components.fadingEdge
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.json.put
 import org.maplibre.compose.camera.CameraPosition
-import org.maplibre.compose.camera.rememberCameraState
+import org.maplibre.compose.camera.CameraUpdate
 import org.maplibre.compose.expressions.ast.Expression
-import org.maplibre.compose.expressions.dsl.Feature.get
 import org.maplibre.compose.expressions.dsl.all
 import org.maplibre.compose.expressions.dsl.and
 import org.maplibre.compose.expressions.dsl.any
@@ -95,17 +85,19 @@ import org.maplibre.compose.expressions.dsl.linear
 import org.maplibre.compose.expressions.dsl.lt
 import org.maplibre.compose.expressions.dsl.zoom
 import org.maplibre.compose.expressions.value.BooleanValue
+import org.maplibre.compose.interaction.ClickResult
 import org.maplibre.compose.layers.CircleLayer
 import org.maplibre.compose.layers.SymbolLayer
-import org.maplibre.compose.map.GestureOptions
-import org.maplibre.compose.map.MapOptions
+import org.maplibre.compose.location.rememberLocationState
+import org.maplibre.compose.map.DefaultMapRuntime
 import org.maplibre.compose.map.MaplibreMap
+import org.maplibre.compose.map.rememberMapState
+import org.maplibre.compose.offline.OfflineStorageState
+import org.maplibre.compose.offline.offlineStorage
 import org.maplibre.compose.sources.GeoJsonData
 import org.maplibre.compose.sources.rememberGeoJsonSource
 import org.maplibre.compose.style.BaseStyle
-import org.maplibre.compose.util.ClickResult
 import org.maplibre.compose.offline.OfflinePackDefinition
-import org.maplibre.compose.offline.rememberOfflineManager
 import org.maplibre.spatialk.geojson.BoundingBox
 import org.maplibre.spatialk.geojson.Feature
 import org.maplibre.spatialk.geojson.FeatureCollection
@@ -131,40 +123,6 @@ fun MapScreen(
     val uiState by viewModel.uiState.collectAsState()
     val antennaIcon = painterResource(R.drawable.antenna_icon)
 
-    val camera = rememberCameraState(
-        firstPosition = CameraPosition(
-            target = Position(latitude = 52.0, longitude = 19.0),
-            zoom = 6.0
-        )
-    )
-
-    val permissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
-        val isGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
-                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
-        viewModel.onPermissionResult(isGranted)
-    }
-
-    LaunchedEffect(viewModel) {
-        viewModel.uiEvents.collect { event ->
-            when (event) {
-                is MapUiEvent.ShowToast -> showSingleToast(context, event.message, Toast.LENGTH_LONG)
-                is MapUiEvent.AnimateCamera -> camera.animateTo(CameraPosition(target = event.position, zoom = event.zoom))
-                is MapUiEvent.RequestLocationPermission -> {
-                    permissionLauncher.launch(
-                        arrayOf(
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                        )
-                    )
-                }
-            }
-        }
-    }
-
-    val offlineManager = rememberOfflineManager()
-
     var isOnline by remember { mutableStateOf(true) }
     DisposableEffect(context) {
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -183,29 +141,209 @@ fun MapScreen(
         }
     }
 
-    val packCount = offlineManager.packs.size
+    val offlineStorage = DefaultMapRuntime.instance.offlineStorage
+    val offlineState by offlineStorage.state.collectAsState()
+
+    val camera = rememberMapState(
+        initialCameraPosition = CameraPosition(
+            center = Position(latitude = 52.0, longitude = 19.0),
+            zoom = 6.0
+        ),
+        baseStyle = BaseStyle.Uri(
+            if (isOnline || offlineState is OfflineStorageState.Ready) "asset://style_liberty.json"
+            else "asset://style_fallback.json"
+        )
+    ) {
+        // cache geojson parsing to prevent map flickering
+        val geoJsonData = remember(uiState.repeatersGeoJson) {
+            GeoJsonData.JsonString(uiState.repeatersGeoJson)
+        }
+        val repeaterSource = rememberGeoJsonSource(
+            data = geoJsonData
+        )
+
+        // cache filters to prevent continuous re-evaluation
+        val finalFilter = remember(uiState.filters) {
+            val statusFilters = mutableListOf<Expression<BooleanValue>>().apply {
+                if (uiState.filters.working) add(feature["status"].asString().eq(const("working")))
+                if (uiState.filters.stopped) add(feature["status"].asString().eq(const("off")))
+                if (uiState.filters.planned) add(feature["status"].asString().eq(const("planned")))
+                if (uiState.filters.testing) add(feature["status"].asString().eq(const("testing")))
+                if (uiState.filters.building) add(feature["status"].asString().eq(const("inprogress")))
+                if (uiState.filters.unverified) add(feature["status"].asString().eq(const("unverified")))
+            }
+
+            val frequencyFilters = mutableListOf<Expression<BooleanValue>>().apply {
+                if (uiState.filters.cm23) {
+                    add(feature["tx_freq"].asNumber().gt(const(1240.0f)).and(feature["tx_freq"].asNumber().lt(const(1300.0f))).and(feature["rx_freq"].asNumber().gt(const(1240.0f)).and(feature["rx_freq"].asNumber().lt(const(1300.0f)))))
+                }
+                if (uiState.filters.cm70) {
+                    add(feature["tx_freq"].asNumber().gt(const(420.0f)).and(feature["tx_freq"].asNumber().lt(const(450.0f))).and(feature["rx_freq"].asNumber().gt(const(420.0f)).and(feature["rx_freq"].asNumber().lt(const(450.0f)))))
+                }
+                if (uiState.filters.m2) {
+                    add(feature["tx_freq"].asNumber().gt(const(144.0f)).and(feature["tx_freq"].asNumber().lt(const(146.0f))).and(feature["rx_freq"].asNumber().gt(const(144.0f)).and(feature["rx_freq"].asNumber().lt(const(146.0f)))))
+                }
+                if (uiState.filters.m4) {
+                    add(feature["tx_freq"].asNumber().gt(const(70.0f)).and(feature["tx_freq"].asNumber().lt(const(70.5f))).and(feature["rx_freq"].asNumber().gt(const(70.0f)).and(feature["rx_freq"].asNumber().lt(const(70.5f)))))
+                }
+                if (uiState.filters.m6) {
+                    add(feature["tx_freq"].asNumber().gt(const(50.0f)).and(feature["tx_freq"].asNumber().lt(const(52.0f))).and(feature["rx_freq"].asNumber().gt(const(50.0f)).and(feature["rx_freq"].asNumber().lt(const(52.0f)))))
+                }
+                if (uiState.filters.m10) {
+                    add(feature["tx_freq"].asNumber().gt(const(28.0f)).and(feature["tx_freq"].asNumber().lt(const(29.7f))).and(feature["rx_freq"].asNumber().gt(const(28.0f)).and(feature["rx_freq"].asNumber().lt(const(29.7f)))))
+                }
+            }
+
+            if (statusFilters.isEmpty() || frequencyFilters.isEmpty()) {
+                const(false)
+            } else {
+                all(
+                    any(*statusFilters.toTypedArray()),
+                    any(*frequencyFilters.toTypedArray())
+                )
+            }
+        }
+
+        CircleLayer(
+            id = "repeaters-circle-fallback",
+            source = repeaterSource,
+            color = const(Color(0xFF1976D2)),
+            radius = const(5.dp),
+            filter = finalFilter
+        )
+
+        SymbolLayer(
+            id = "working-repeaters",
+            source = repeaterSource,
+            iconImage = image(antennaIcon),
+            iconSize = const(2.0f),
+            filter = finalFilter,
+            iconAllowOverlap = const(true),
+            iconIgnorePlacement = const(true),
+            onClick = { features ->
+                val name = features.firstOrNull()?.properties?.get("name")?.jsonPrimitive?.content
+                if (name != null) {
+                    viewModel.selectRepeater(name)
+                }
+                ClickResult.Consume
+            },
+            onLongClick = { features ->
+                val name = features.firstOrNull()?.properties?.get("name")?.jsonPrimitive?.content
+                if (name != null) {
+                    val repeater = uiState.allRepeaters.find { it.callsign == name }
+                    if (repeater != null) {
+                        viewModel.calculateElevationProfile(repeater)
+                    }
+                }
+                ClickResult.Consume
+            }
+        )
+
+        uiState.userPosition?.let { pos ->
+            val userGeoJson = remember(pos) {
+                FeatureCollection(
+                    listOf(
+                        Feature(
+                            geometry = Point(pos),
+                            properties = buildJsonObject {}
+                        )
+                    )
+                ).toJson()
+            }
+            val userSource = rememberGeoJsonSource(
+                data = GeoJsonData.JsonString(userGeoJson)
+            )
+
+            CircleLayer(
+                id = "user-location-halo",
+                source = userSource,
+                color = const(Color(0x332196F3)),
+                radius = interpolate(
+                    linear(),
+                    zoom(),
+                    5 to const(10.dp),
+                    12 to const(18.dp)
+                )
+            )
+
+            CircleLayer(
+                id = "user-location-dot",
+                source = userSource,
+                color = const(Color(0xFF2196F3)),
+                radius = interpolate(
+                    linear(),
+                    zoom(),
+                    5 to const(5.dp),
+                    12 to const(8.dp)
+                ),
+                strokeColor = const(Color.White),
+                strokeWidth = interpolate(
+                    linear(),
+                    zoom(),
+                    5 to const(2.dp),
+                    12 to const(3.dp)
+                )
+            )
+            }
+            }
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val isGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] == true
+        viewModel.onPermissionResult(isGranted)
+    }
+
+    LaunchedEffect(viewModel) {
+        viewModel.uiEvents.collect { event ->
+            when (event) {
+                is MapUiEvent.ShowToast -> showSingleToast(context, event.message, Toast.LENGTH_LONG)
+                is MapUiEvent.AnimateCamera -> camera.animateCamera(CameraUpdate(center = event.position, zoom = event.zoom))
+                is MapUiEvent.RequestLocationPermission -> {
+                    permissionLauncher.launch(
+                        arrayOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    val packCount = when (val state = offlineState) {
+        is OfflineStorageState.Ready -> state.packs.size
+        is OfflineStorageState.Loading -> 0
+        is OfflineStorageState.Failed -> {
+            Log.e("MAP_STYLE", "Offline storage failed to load - ${state.cause}")
+            0
+        }
+        else -> 0
+    }
     LaunchedEffect(isOnline, packCount) {
         val styleName = if (isOnline || packCount > 0) "style_liberty.json" else "style_fallback.json"
         Log.i("MAP_STYLE", "Map style -> isOnline=$isOnline, cachedPacks=$packCount -> Loading $styleName")
     }
     LaunchedEffect(Unit) {
         try {
-            if (offlineManager.packs.isEmpty()) {
+            if (offlineState is OfflineStorageState.Ready) {
                 val polandBounds = BoundingBox(
                     west = 14.1,
                     south = 49.0,
                     east = 24.1,
                     north = 54.9
                 )
-                val polandPack = offlineManager.create(
+                val polandPack = offlineStorage.create(
                     definition = OfflinePackDefinition.TilePyramid(
                         styleUrl = "https://tiles.openfreemap.org/styles/liberty",
                         bounds = polandBounds,
-                        minZoom = 5,
-                        maxZoom = 12
+                        minZoom = 5.0,
+                        maxZoom = 12.0,
+                        pixelRatio = 0F
                     )
                 )
-                offlineManager.resume(polandPack)
+                offlineStorage.resume(polandPack)
             }
         } catch (e: Exception) {
             Log.e("MAP_OFFLINE", "Error initializing offline map pack", e)
@@ -300,151 +438,10 @@ fun MapScreen(
         }
         Box(modifier = modifier.padding(innerPadding)) {
             MaplibreMap(
-                cameraState = camera,
-                options = MapOptions(
-                    gestureOptions = GestureOptions(
-                        isRotateEnabled = false,
-                        isTiltEnabled = false
-                    ),
-                    ornamentOptions = org.maplibre.compose.map.OrnamentOptions.AllDisabled
-                ),
-                baseStyle = BaseStyle.Uri(
-                    if (isOnline || offlineManager.packs.isNotEmpty()) "asset://style_liberty.json"
-                    else "asset://style_fallback.json"
-                )
-            ) {
-                // cache geojson parsing to prevent map flickering
-                val geoJsonData = remember(uiState.repeatersGeoJson) {
-                    GeoJsonData.JsonString(uiState.repeatersGeoJson)
-                }
-                val repeaterSource = rememberGeoJsonSource(
-                    data = geoJsonData
-                )
-
-                // cache filters to prevent continuous re-evaluation
-                val finalFilter = remember(uiState.filters) {
-                    val statusFilters = mutableListOf<Expression<BooleanValue>>().apply {
-                        if (uiState.filters.working) add(feature["status"].asString().eq(const("working")))
-                        if (uiState.filters.stopped) add(feature["status"].asString().eq(const("off")))
-                        if (uiState.filters.planned) add(feature["status"].asString().eq(const("planned")))
-                        if (uiState.filters.testing) add(feature["status"].asString().eq(const("testing")))
-                        if (uiState.filters.building) add(feature["status"].asString().eq(const("inprogress")))
-                        if (uiState.filters.unverified) add(feature["status"].asString().eq(const("unverified")))
-                    }
-
-                    val frequencyFilters = mutableListOf<Expression<BooleanValue>>().apply {
-                        if (uiState.filters.cm23) {
-                            add(feature["tx_freq"].asNumber().gt(const(1240.0f)).and(feature["tx_freq"].asNumber().lt(const(1300.0f))).and(feature["rx_freq"].asNumber().gt(const(1240.0f)).and(feature["rx_freq"].asNumber().lt(const(1300.0f)))))
-                        }
-                        if (uiState.filters.cm70) {
-                            add(feature["tx_freq"].asNumber().gt(const(420.0f)).and(feature["tx_freq"].asNumber().lt(const(450.0f))).and(feature["rx_freq"].asNumber().gt(const(420.0f)).and(feature["rx_freq"].asNumber().lt(const(450.0f)))))
-                        }
-                        if (uiState.filters.m2) {
-                            add(feature["tx_freq"].asNumber().gt(const(144.0f)).and(feature["tx_freq"].asNumber().lt(const(146.0f))).and(feature["rx_freq"].asNumber().gt(const(144.0f)).and(feature["rx_freq"].asNumber().lt(const(146.0f)))))
-                        }
-                        if (uiState.filters.m4) {
-                            add(feature["tx_freq"].asNumber().gt(const(70.0f)).and(feature["tx_freq"].asNumber().lt(const(70.5f))).and(feature["rx_freq"].asNumber().gt(const(70.0f)).and(feature["rx_freq"].asNumber().lt(const(70.5f)))))
-                        }
-                        if (uiState.filters.m6) {
-                            add(feature["tx_freq"].asNumber().gt(const(50.0f)).and(feature["tx_freq"].asNumber().lt(const(52.0f))).and(feature["rx_freq"].asNumber().gt(const(50.0f)).and(feature["rx_freq"].asNumber().lt(const(52.0f)))))
-                        }
-                        if (uiState.filters.m10) {
-                            add(feature["tx_freq"].asNumber().gt(const(28.0f)).and(feature["tx_freq"].asNumber().lt(const(29.7f))).and(feature["rx_freq"].asNumber().gt(const(28.0f)).and(feature["rx_freq"].asNumber().lt(const(29.7f)))))
-                        }
-                    }
-                    
-                    if (statusFilters.isEmpty() || frequencyFilters.isEmpty()) {
-                        const(false)
-                    } else {
-                        all(
-                            any(*statusFilters.toTypedArray()),
-                            any(*frequencyFilters.toTypedArray())
-                        )
-                    }
-                }
-
-                CircleLayer(
-                    id = "repeaters-circle-fallback",
-                    source = repeaterSource,
-                    color = const(Color(0xFF1976D2)),
-                    radius = const(5.dp),
-                    filter = finalFilter
-                )
-
-                SymbolLayer(
-                    id = "working-repeaters",
-                    source = repeaterSource,
-                    iconImage = image(antennaIcon),
-                    iconSize = const(2.0f),
-                    filter = finalFilter,
-                    iconAllowOverlap = const(true),
-                    iconIgnorePlacement = const(true),
-                    onClick = { features ->
-                        val name = features.firstOrNull()?.properties?.get("name")?.jsonPrimitive?.content
-                        if (name != null) {
-                            viewModel.selectRepeater(name)
-                        }
-                        ClickResult.Consume
-                    },
-                    onLongClick = { features ->
-                        val name = features.firstOrNull()?.properties?.get("name")?.jsonPrimitive?.content
-                        if (name != null) {
-                            val repeater = uiState.allRepeaters.find { it.callsign == name }
-                            if (repeater != null) {
-                                viewModel.calculateElevationProfile(repeater)
-                            }
-                        }
-                        ClickResult.Consume
-                    }
-                )
-
-                uiState.userPosition?.let { pos ->
-                    val userGeoJson = remember(pos) {
-                        FeatureCollection(
-                            listOf(
-                                Feature(
-                                    geometry = Point(pos),
-                                    properties = buildJsonObject {}
-                                )
-                            )
-                        ).toJson()
-                    }
-                    val userSource = rememberGeoJsonSource(
-                        data = GeoJsonData.JsonString(userGeoJson)
-                    )
-
-                    CircleLayer(
-                        id = "user-location-halo",
-                        source = userSource,
-                        color = const(Color(0x332196F3)),
-                        radius = interpolate(
-                            linear(),
-                            zoom(),
-                            5 to const(10.dp),
-                            12 to const(18.dp)
-                        )
-                    )
-
-                    CircleLayer(
-                        id = "user-location-dot",
-                        source = userSource,
-                        color = const(Color(0xFF2196F3)),
-                        radius = interpolate(
-                            linear(),
-                            zoom(),
-                            5 to const(5.dp),
-                            12 to const(8.dp)
-                        ),
-                        strokeColor = const(Color.White),
-                        strokeWidth = interpolate(
-                            linear(),
-                            zoom(),
-                            5 to const(2.dp),
-                            12 to const(3.dp)
-                        )
-                    )
-                }
-            }
+                modifier = Modifier.fillMaxSize(),
+                state = camera,
+                overlay = {}
+            )
 
             if (uiState.isLoading) {
                 ElevatedCard(
@@ -571,7 +568,7 @@ fun MapScreen(
                                     fontWeight = FontWeight.Bold,
                                     modifier = Modifier.padding(start = 8.dp)
                                 )
-                                
+
                                 ElevationProfileGraph(
                                     points = profile.points,
                                     totalDistanceMeters = profile.totalDistanceMeters,
@@ -580,7 +577,7 @@ fun MapScreen(
                                     repeaterAntennaHeight = profile.repeaterAntennaHeight,
                                     modifier = Modifier.fillMaxWidth().weight(1f)
                                 )
-                                
+
                                 // antenna height sliders
                                 androidx.compose.foundation.layout.Row(
                                     modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp),
