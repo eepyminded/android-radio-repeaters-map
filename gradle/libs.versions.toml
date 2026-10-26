@@ -11,7 +11,7 @@ composeBom = "2026.09.00"
 foundationLayout = "1.11.4"
 spatialkGeojson = "0.8.0"
 gson = "2.14.0"
-kotlinxSerializationJson = "1.11.0"
+kotlinxSerializationJson = "1.12.0"
 navigationCompose = "2.10.2"
 
 [libraries]
