@@ -1,7 +1,72 @@
 [
     {
-        "callsign": "SR9FMJ",
+        "callsign": "SR5OXO",
         "modes": [
+            "nxdn"
+        ],
+        "networks": [],
+        "tx_frequency": 144.8625,
+        "tx_ctcss": false,
+        "rx_frequency": 144.8625,
+        "rx_ctcss": false,
+        "rx_1750": false,
+        "duplex": false,
+        "offset": 0,
+        "status": "working",
+        "coordinates": [
+            52.15028,
+            21.04194
+        ],
+        "qth": "Warszawa - Ursynow",
+        "locator": "KO02MD"
+    },
+    {
+        "callsign": "SR3WR",
+        "modes": [
+            "fm"
+        ],
+        "networks": [],
+        "tx_frequency": 438.825,
+        "tx_ctcss": 110.9,
+        "rx_frequency": 431.225,
+        "rx_ctcss": 110.9,
+        "rx_1750": false,
+        "duplex": "-",
+        "offset": 7.6,
+        "status": "working",
+        "coordinates": [
+            52.7092727,
+            16.3925027
+        ],
+        "qth": "Wronki",
+        "locator": "JO82ER"
+    },
+    {
+        "callsign": "SR7VTM",
+        "modes": [
+            "fm",
+            "c4fm"
+        ],
+        "networks": [],
+        "tx_frequency": 145.65,
+        "tx_ctcss": 118.8,
+        "rx_frequency": 145.05,
+        "rx_ctcss": 118.8,
+        "rx_1750": false,
+        "duplex": "-",
+        "offset": 0.6,
+        "status": "inprogress",
+        "coordinates": [
+            51.5478996,
+            20.0449526
+        ],
+        "qth": "Tomaszow Mazowiecki",
+        "locator": "KO01AN"
+    },
+    {
+        "callsign": "SR9FMJ",
+        "modes": [],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 438.4,
@@ -24,6 +89,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7,
         "tx_ctcss": 74.4,
         "rx_frequency": 145.1,
@@ -44,6 +110,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.5625,
         "tx_ctcss": false,
         "rx_frequency": 431.9625,
@@ -64,6 +131,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.9,
         "tx_ctcss": false,
         "rx_frequency": 430.5,
@@ -84,6 +152,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.3375,
         "tx_ctcss": 74.4,
         "rx_frequency": 431.7375,
@@ -104,6 +173,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.1375,
         "tx_ctcss": 74.4,
         "rx_frequency": 431.5375,
@@ -124,6 +194,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": 74.4,
         "rx_frequency": 145.15,
@@ -144,6 +215,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.575,
         "tx_ctcss": false,
         "rx_frequency": 149.975,
@@ -164,6 +236,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.3125,
         "tx_ctcss": false,
         "rx_frequency": 431.7125,
@@ -184,6 +257,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.8625,
         "tx_ctcss": false,
         "rx_frequency": 431.2265,
@@ -204,6 +278,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.6625,
         "tx_ctcss": 67,
         "rx_frequency": 431.0625,
@@ -222,7 +297,9 @@
     {
         "callsign": "SR7WU",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.55,
@@ -245,6 +322,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1270.7,
         "tx_ctcss": false,
         "rx_frequency": 1298.7,
@@ -265,6 +343,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.6,
         "tx_ctcss": false,
         "rx_frequency": 1270.6,
@@ -285,6 +364,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.725,
         "tx_ctcss": false,
         "rx_frequency": 145.125,
@@ -305,6 +385,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.1,
         "tx_ctcss": 110.9,
         "rx_frequency": 431.5,
@@ -326,6 +407,7 @@
             "c4fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.8,
         "tx_ctcss": false,
         "rx_frequency": 431.2,
@@ -344,7 +426,9 @@
     {
         "callsign": "SR1GL",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 145.28,
@@ -368,6 +452,7 @@
             "fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 1287.575,
         "tx_ctcss": 127.3,
         "rx_frequency": 1270.575,
@@ -388,6 +473,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": 94.8,
         "rx_frequency": 145.15,
@@ -406,7 +492,9 @@
     {
         "callsign": "SR8GDM",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.375,
@@ -429,6 +517,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 431.875,
         "tx_ctcss": 94.8,
         "rx_frequency": 439.475,
@@ -447,7 +536,9 @@
     {
         "callsign": "SR8RW",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 433.5375,
@@ -473,6 +564,7 @@
             "c4fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.825,
         "tx_ctcss": 71.9,
         "rx_frequency": 431.225,
@@ -493,6 +585,7 @@
         "modes": [
             "tetra"
         ],
+        "networks": [],
         "tx_frequency": 430.075,
         "tx_ctcss": false,
         "rx_frequency": 430.075,
@@ -513,6 +606,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.1875,
         "tx_ctcss": false,
         "rx_frequency": 431.5875,
@@ -532,9 +626,9 @@
         "callsign": "SR1ZS",
         "modes": [
             "fm",
-            "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439,
         "tx_ctcss": 82.5,
         "rx_frequency": 431.4,
@@ -542,7 +636,7 @@
         "rx_1750": false,
         "duplex": "-",
         "offset": 7.6,
-        "status": "testing",
+        "status": "working",
         "coordinates": [
             53.40396,
             14.52215
@@ -556,6 +650,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.35,
         "tx_ctcss": 107.2,
         "rx_frequency": 431.75,
@@ -577,6 +672,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.325,
         "tx_ctcss": 107.2,
         "rx_frequency": 431.725,
@@ -598,6 +694,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.25,
         "tx_ctcss": 107.2,
         "rx_frequency": 431.65,
@@ -618,6 +715,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.1875,
         "tx_ctcss": false,
         "rx_frequency": 431.5875,
@@ -638,6 +736,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.1375,
         "tx_ctcss": false,
         "rx_frequency": 431.5375,
@@ -658,6 +757,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.55,
         "tx_ctcss": false,
         "rx_frequency": 431.95,
@@ -676,7 +776,9 @@
     {
         "callsign": "SR2KW",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -700,6 +802,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.65,
         "tx_ctcss": 114.8,
         "rx_frequency": 434.75,
@@ -721,6 +824,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.55,
         "tx_ctcss": false,
         "rx_frequency": 430.95,
@@ -741,6 +845,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.4125,
         "tx_ctcss": false,
         "rx_frequency": 431.8125,
@@ -761,6 +866,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.475,
         "tx_ctcss": false,
         "rx_frequency": 431.875,
@@ -779,7 +885,9 @@
     {
         "callsign": "SR9BB",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.5375,
@@ -802,6 +910,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.725,
         "tx_ctcss": 77,
         "rx_frequency": 145.125,
@@ -820,7 +929,9 @@
     {
         "callsign": "SR9NKU",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -842,7 +953,9 @@
     {
         "callsign": "SR8RZE",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.2875,
@@ -865,6 +978,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6875,
         "tx_ctcss": false,
         "rx_frequency": 145.0875,
@@ -885,6 +999,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.8,
         "tx_ctcss": false,
         "rx_frequency": 431.2,
@@ -905,6 +1020,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.4875,
         "tx_ctcss": false,
         "rx_frequency": 430.8875,
@@ -923,7 +1039,9 @@
     {
         "callsign": "SR9BB",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.5375,
@@ -944,7 +1062,9 @@
     {
         "callsign": "SR4T",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "extremelink"
         ],
@@ -970,6 +1090,7 @@
             "c4fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.4,
         "tx_ctcss": false,
         "rx_frequency": 430.8,
@@ -990,6 +1111,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 51.81,
         "tx_ctcss": 67,
         "rx_frequency": 51.21,
@@ -1008,7 +1130,9 @@
     {
         "callsign": "SR8FM",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 434.4,
@@ -1031,6 +1155,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.05,
         "tx_ctcss": false,
         "rx_frequency": 431.45,
@@ -1051,6 +1176,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6625,
         "tx_ctcss": 79.7,
         "rx_frequency": 145.0625,
@@ -1071,6 +1197,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.25,
         "tx_ctcss": false,
         "rx_frequency": 431.65,
@@ -1089,7 +1216,9 @@
     {
         "callsign": "SR5ZOC",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 145.587,
@@ -1113,6 +1242,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 431.3375,
         "tx_ctcss": 77,
         "rx_frequency": 438.9375,
@@ -1133,6 +1263,7 @@
         "modes": [
             "tetra"
         ],
+        "networks": [],
         "tx_frequency": 431.625,
         "tx_ctcss": false,
         "rx_frequency": 430.025,
@@ -1153,6 +1284,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6,
         "tx_ctcss": 103.5,
         "rx_frequency": 145,
@@ -1171,7 +1303,9 @@
     {
         "callsign": "SR9RT",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 29.66,
@@ -1192,7 +1326,9 @@
     {
         "callsign": "SR9RT",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 51.99,
@@ -1213,7 +1349,9 @@
     {
         "callsign": "SR9RT",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 438.6375,
@@ -1234,7 +1372,9 @@
     {
         "callsign": "SR7KFX",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 438.2625,
@@ -1257,6 +1397,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.05,
         "tx_ctcss": false,
         "rx_frequency": 431.45,
@@ -1277,6 +1418,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.65,
         "tx_ctcss": false,
         "rx_frequency": 431.05,
@@ -1298,6 +1440,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.25,
         "tx_ctcss": false,
         "rx_frequency": 430.65,
@@ -1318,6 +1461,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.1875,
         "tx_ctcss": 110.9,
         "rx_frequency": 431.5875,
@@ -1338,6 +1482,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7,
         "tx_ctcss": false,
         "rx_frequency": 145.7,
@@ -1358,6 +1503,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.6875,
         "tx_ctcss": false,
         "rx_frequency": 431.0875,
@@ -1378,6 +1524,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.65,
         "tx_ctcss": 123,
         "rx_frequency": 145.05,
@@ -1398,6 +1545,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.15,
         "tx_ctcss": false,
         "rx_frequency": 439.15,
@@ -1418,6 +1566,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.675,
         "tx_ctcss": 67,
         "rx_frequency": 431.075,
@@ -1438,6 +1587,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.4,
         "tx_ctcss": 77,
         "rx_frequency": 431.8,
@@ -1458,6 +1608,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.575,
         "tx_ctcss": false,
         "rx_frequency": 430.975,
@@ -1478,6 +1629,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.575,
         "tx_ctcss": false,
         "rx_frequency": 431.975,
@@ -1498,6 +1650,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.1625,
         "tx_ctcss": false,
         "rx_frequency": 431.5625,
@@ -1516,7 +1669,9 @@
     {
         "callsign": "SR4PL",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "extremelink"
         ],
@@ -1540,6 +1695,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.525,
         "tx_ctcss": false,
         "rx_frequency": 431.925,
@@ -1558,7 +1714,9 @@
     {
         "callsign": "SR4SUW",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 434.7,
@@ -1579,7 +1737,9 @@
     {
         "callsign": "SR4WA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "minilink"
         ],
@@ -1601,7 +1761,9 @@
     {
         "callsign": "SR4ST",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "minilink"
         ],
@@ -1626,6 +1788,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145,
         "tx_ctcss": 71.9,
         "rx_frequency": 145,
@@ -1644,7 +1807,9 @@
     {
         "callsign": "SR6RC",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 438.1,
@@ -1665,7 +1830,9 @@
     {
         "callsign": "SR6L",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.125,
@@ -1688,6 +1855,7 @@
         "modes": [
             "tetra"
         ],
+        "networks": [],
         "tx_frequency": 430.1,
         "tx_ctcss": false,
         "rx_frequency": 431.7,
@@ -1708,6 +1876,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.5375,
         "tx_ctcss": 67,
         "rx_frequency": 431.9375,
@@ -1725,7 +1894,8 @@
     },
     {
         "callsign": "SR9ZAC",
-        "modes": [
+        "modes": [],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.2875,
@@ -1748,6 +1918,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7375,
         "tx_ctcss": 107.2,
         "rx_frequency": 145.1375,
@@ -1768,6 +1939,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7,
         "tx_ctcss": 94.8,
         "rx_frequency": 145.1,
@@ -1788,6 +1960,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.4375,
         "tx_ctcss": false,
         "rx_frequency": 431.8375,
@@ -1808,6 +1981,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.7125,
         "tx_ctcss": false,
         "rx_frequency": 431.1125,
@@ -1826,7 +2000,9 @@
     {
         "callsign": "SR9VO",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.075,
@@ -1849,6 +2025,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.3125,
         "tx_ctcss": false,
         "rx_frequency": 430.7125,
@@ -1869,6 +2046,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.2,
         "tx_ctcss": false,
         "rx_frequency": 430.6,
@@ -1890,6 +2068,7 @@
             "c4fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.2,
         "tx_ctcss": false,
         "rx_frequency": 431.6,
@@ -1910,6 +2089,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.1625,
         "tx_ctcss": false,
         "rx_frequency": 431.5625,
@@ -1930,6 +2110,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.2375,
         "tx_ctcss": false,
         "rx_frequency": 431.6375,
@@ -1948,7 +2129,9 @@
     {
         "callsign": "SR9UVR",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.3,
@@ -1971,6 +2154,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.3625,
         "tx_ctcss": false,
         "rx_frequency": 431.7625,
@@ -1991,6 +2175,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.325,
         "tx_ctcss": false,
         "rx_frequency": 431.725,
@@ -2011,6 +2196,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.4,
         "tx_ctcss": false,
         "rx_frequency": 431.8,
@@ -2031,6 +2217,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.3625,
         "tx_ctcss": false,
         "rx_frequency": 430.7625,
@@ -2051,6 +2238,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 145.7875,
         "tx_ctcss": false,
         "rx_frequency": 145.1875,
@@ -2071,6 +2259,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.5,
         "tx_ctcss": false,
         "rx_frequency": 431.9,
@@ -2091,6 +2280,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.625,
         "tx_ctcss": false,
         "rx_frequency": 431.025,
@@ -2111,6 +2301,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.3375,
         "tx_ctcss": false,
         "rx_frequency": 431.7375,
@@ -2131,6 +2322,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.125,
         "tx_ctcss": false,
         "rx_frequency": 430.525,
@@ -2151,6 +2343,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.5875,
         "tx_ctcss": false,
         "rx_frequency": 430.9875,
@@ -2171,6 +2364,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.0875,
         "tx_ctcss": false,
         "rx_frequency": 431.4875,
@@ -2191,6 +2385,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.575,
         "tx_ctcss": false,
         "rx_frequency": 430.975,
@@ -2211,6 +2406,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.175,
         "tx_ctcss": false,
         "rx_frequency": 431.575,
@@ -2232,6 +2428,7 @@
             "fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.5125,
         "tx_ctcss": 103.5,
         "rx_frequency": 430.9125,
@@ -2252,6 +2449,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.775,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.175,
@@ -2272,6 +2470,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.15,
         "tx_ctcss": false,
         "rx_frequency": 431.55,
@@ -2290,7 +2489,9 @@
     {
         "callsign": "SR9SS",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 439.1,
@@ -2314,6 +2515,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.375,
         "tx_ctcss": 67,
         "rx_frequency": 431.775,
@@ -2331,7 +2533,8 @@
     },
     {
         "callsign": "SR9SIM",
-        "modes": [
+        "modes": [],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.3375,
@@ -2355,6 +2558,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.2,
         "tx_ctcss": 71.9,
         "rx_frequency": 431.6,
@@ -2376,6 +2580,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.9625,
         "tx_ctcss": false,
         "rx_frequency": 431.3625,
@@ -2394,7 +2599,9 @@
     {
         "callsign": "SR9SA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.45,
@@ -2418,6 +2625,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.4125,
         "tx_ctcss": 67,
         "rx_frequency": 431.8125,
@@ -2438,6 +2646,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.775,
         "tx_ctcss": 67,
         "rx_frequency": 145.175,
@@ -2456,7 +2665,9 @@
     {
         "callsign": "SR9RT",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 145.6375,
@@ -2479,6 +2690,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.3375,
         "tx_ctcss": false,
         "rx_frequency": 430.7375,
@@ -2499,6 +2711,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.575,
         "tx_ctcss": 67,
         "rx_frequency": 431.975,
@@ -2517,7 +2730,9 @@
     {
         "callsign": "SR9PS",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.25,
@@ -2537,7 +2752,8 @@
     },
     {
         "callsign": "SR9POL",
-        "modes": [
+        "modes": [],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 50.53,
@@ -2560,6 +2776,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.85,
         "tx_ctcss": false,
         "rx_frequency": 431.25,
@@ -2578,9 +2795,9 @@
     {
         "callsign": "SR9P",
         "modes": [
-            "fm",
-            "echolink"
+            "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6625,
         "tx_ctcss": false,
         "rx_frequency": 145.0625,
@@ -2588,7 +2805,7 @@
         "rx_1750": false,
         "duplex": "-",
         "offset": 0.6,
-        "status": "off",
+        "status": "working",
         "coordinates": [
             49.7533,
             19.7822
@@ -2601,6 +2818,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.75,
         "tx_ctcss": false,
         "rx_frequency": 431.15,
@@ -2621,6 +2839,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 434.675,
         "tx_ctcss": false,
         "rx_frequency": 434.675,
@@ -2638,7 +2857,8 @@
     },
     {
         "callsign": "SR9NSC",
-        "modes": [
+        "modes": [],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -2663,6 +2883,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.225,
         "tx_ctcss": 107.2,
         "rx_frequency": 431.625,
@@ -2681,7 +2902,9 @@
     {
         "callsign": "SR9NP",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.9375,
@@ -2704,6 +2927,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.7,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.1,
@@ -2724,6 +2948,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.15,
         "tx_ctcss": false,
         "rx_frequency": 1270.15,
@@ -2744,6 +2969,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.5,
         "tx_ctcss": false,
         "rx_frequency": 1270.5,
@@ -2762,7 +2988,9 @@
     {
         "callsign": "SR9LI",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.675,
@@ -2786,6 +3014,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.7,
         "tx_ctcss": 71.9,
         "rx_frequency": 431.1,
@@ -2806,6 +3035,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6875,
         "tx_ctcss": 107.2,
         "rx_frequency": 145.0875,
@@ -2826,6 +3056,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.9,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.3,
@@ -2846,6 +3077,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.275,
         "tx_ctcss": false,
         "rx_frequency": 431.675,
@@ -2866,6 +3098,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.975,
         "tx_ctcss": false,
         "rx_frequency": 431.375,
@@ -2887,6 +3120,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.95,
         "tx_ctcss": false,
         "rx_frequency": 431.35,
@@ -2911,6 +3145,7 @@
             "apco25",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.2125,
         "tx_ctcss": false,
         "rx_frequency": 431.6125,
@@ -2931,6 +3166,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": false,
         "rx_frequency": 145.15,
@@ -2949,7 +3185,9 @@
     {
         "callsign": "SR9JK",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.8,
@@ -2970,7 +3208,9 @@
     {
         "callsign": "SR9JG",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.4625,
@@ -2993,6 +3233,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7875,
         "tx_ctcss": 123,
         "rx_frequency": 145.1875,
@@ -3011,7 +3252,9 @@
     {
         "callsign": "SR9IVG",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 70.26,
@@ -3037,6 +3280,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.5375,
         "tx_ctcss": 162.2,
         "rx_frequency": 430.9375,
@@ -3055,7 +3299,9 @@
     {
         "callsign": "SR9GP",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.65,
@@ -3078,6 +3324,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 29.66,
         "tx_ctcss": 107.2,
         "rx_frequency": 29.56,
@@ -3096,7 +3343,9 @@
     {
         "callsign": "SR9EHO",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 29.61,
@@ -3119,6 +3368,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": false,
         "rx_frequency": 431.275,
@@ -3137,7 +3387,9 @@
     {
         "callsign": "SR9E",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.725,
@@ -3163,6 +3415,7 @@
             "c4fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.325,
         "tx_ctcss": false,
         "rx_frequency": 430.725,
@@ -3183,6 +3436,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 145.5875,
         "tx_ctcss": false,
         "rx_frequency": 144.9875,
@@ -3203,6 +3457,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.525,
         "tx_ctcss": false,
         "rx_frequency": 430.925,
@@ -3223,6 +3478,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.45,
         "tx_ctcss": false,
         "rx_frequency": 430.85,
@@ -3243,6 +3499,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.975,
         "tx_ctcss": false,
         "rx_frequency": 431.375,
@@ -3263,6 +3520,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.5,
         "tx_ctcss": false,
         "rx_frequency": 430.9,
@@ -3283,6 +3541,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.375,
         "tx_ctcss": false,
         "rx_frequency": 430.775,
@@ -3303,6 +3562,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.55,
         "tx_ctcss": false,
         "rx_frequency": 430.95,
@@ -3323,6 +3583,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.475,
         "tx_ctcss": false,
         "rx_frequency": 430.875,
@@ -3344,6 +3605,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.675,
         "tx_ctcss": false,
         "rx_frequency": 145.075,
@@ -3364,6 +3626,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.5625,
         "tx_ctcss": false,
         "rx_frequency": 431.9625,
@@ -3381,7 +3644,8 @@
     },
     {
         "callsign": "SR9CZC",
-        "modes": [
+        "modes": [],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.3375,
@@ -3404,6 +3668,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.175,
         "tx_ctcss": false,
         "rx_frequency": 431.575,
@@ -3424,6 +3689,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.5125,
         "tx_ctcss": false,
         "rx_frequency": 431.9125,
@@ -3444,6 +3710,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6,
         "tx_ctcss": 103.5,
         "rx_frequency": 145,
@@ -3465,6 +3732,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.25,
         "tx_ctcss": false,
         "rx_frequency": 430.65,
@@ -3485,6 +3753,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.225,
         "tx_ctcss": false,
         "rx_frequency": 431.625,
@@ -3506,6 +3775,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7125,
         "tx_ctcss": false,
         "rx_frequency": 145.1125,
@@ -3527,6 +3797,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.3,
         "tx_ctcss": 74.4,
         "rx_frequency": 430.7,
@@ -3546,8 +3817,10 @@
         "callsign": "SR9AMS",
         "modes": [
             "fm",
-            "echolink",
             "c4fm"
+        ],
+        "networks": [
+            "echolink"
         ],
         "tx_frequency": 145.2375,
         "tx_ctcss": 107.2,
@@ -3569,6 +3842,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.825,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.225,
@@ -3589,6 +3863,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439,
         "tx_ctcss": false,
         "rx_frequency": 431.4,
@@ -3609,6 +3884,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 51.99,
         "tx_ctcss": false,
         "rx_frequency": 51.39,
@@ -3629,6 +3905,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.775,
         "tx_ctcss": false,
         "rx_frequency": 145.175,
@@ -3649,6 +3926,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.275,
         "tx_ctcss": 77,
         "rx_frequency": 431.675,
@@ -3669,6 +3947,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": 77,
         "rx_frequency": 145.15,
@@ -3689,6 +3968,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7,
         "tx_ctcss": 118.8,
         "rx_frequency": 145.1,
@@ -3709,6 +3989,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.975,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.375,
@@ -3729,6 +4010,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6125,
         "tx_ctcss": false,
         "rx_frequency": 145.0125,
@@ -3751,6 +4033,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.5125,
         "tx_ctcss": false,
         "rx_frequency": 430.9125,
@@ -3771,6 +4054,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.325,
         "tx_ctcss": false,
         "rx_frequency": 430.725,
@@ -3791,6 +4075,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.4625,
         "tx_ctcss": false,
         "rx_frequency": 431.8625,
@@ -3811,6 +4096,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.825,
         "tx_ctcss": false,
         "rx_frequency": 431.225,
@@ -3829,10 +4115,11 @@
     {
         "callsign": "SR8UVC",
         "modes": [
-            "dmr",
             "c4fm",
+            "dmr",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.55,
         "tx_ctcss": false,
         "rx_frequency": 431.95,
@@ -3853,6 +4140,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.4125,
         "tx_ctcss": false,
         "rx_frequency": 431.8125,
@@ -3873,6 +4161,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.1125,
         "tx_ctcss": false,
         "rx_frequency": 431.5125,
@@ -3893,6 +4182,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6875,
         "tx_ctcss": false,
         "rx_frequency": 145.0875,
@@ -3913,6 +4203,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.3375,
         "tx_ctcss": 71.9,
         "rx_frequency": 145.3375,
@@ -3931,7 +4222,9 @@
     {
         "callsign": "SR8TA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.95,
@@ -3952,7 +4245,9 @@
     {
         "callsign": "SR8T",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.725,
@@ -3975,6 +4270,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.65,
         "tx_ctcss": 123,
         "rx_frequency": 431.05,
@@ -3995,6 +4291,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.325,
         "tx_ctcss": 123,
         "rx_frequency": 431.725,
@@ -4015,6 +4312,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7125,
         "tx_ctcss": 123,
         "rx_frequency": 145.1125,
@@ -4036,6 +4334,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.25,
         "tx_ctcss": 71.9,
         "rx_frequency": 431.65,
@@ -4054,7 +4353,9 @@
     {
         "callsign": "SR8RSC",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -4079,6 +4380,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.5,
         "tx_ctcss": 103.5,
         "rx_frequency": 430.9,
@@ -4099,6 +4401,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.9625,
         "tx_ctcss": false,
         "rx_frequency": 431.3625,
@@ -4119,6 +4422,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.675,
         "tx_ctcss": false,
         "rx_frequency": 145.075,
@@ -4139,6 +4443,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.85,
         "tx_ctcss": 118.8,
         "rx_frequency": 431.25,
@@ -4157,7 +4462,9 @@
     {
         "callsign": "SR8PPN",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -4179,7 +4486,9 @@
     {
         "callsign": "SR8PL",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 439.0875,
@@ -4202,6 +4511,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7625,
         "tx_ctcss": 186.2,
         "rx_frequency": 145.1625,
@@ -4220,7 +4530,9 @@
     {
         "callsign": "SR8MBR",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 50.54,
@@ -4241,7 +4553,9 @@
     {
         "callsign": "SR8LW",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -4265,6 +4579,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.525,
         "tx_ctcss": false,
         "rx_frequency": 431.925,
@@ -4285,6 +4600,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.05,
         "tx_ctcss": 67,
         "rx_frequency": 431.45,
@@ -4304,7 +4620,9 @@
         "callsign": "SR8LSW",
         "modes": [
             "fm",
-            "apco25",
+            "apco25"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.025,
@@ -4325,7 +4643,9 @@
     {
         "callsign": "SR8LLB",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -4349,6 +4669,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.7,
         "tx_ctcss": false,
         "rx_frequency": 1270.7,
@@ -4369,6 +4690,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.55,
         "tx_ctcss": 67,
         "rx_frequency": 430.95,
@@ -4389,6 +4711,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 29.67,
         "tx_ctcss": false,
         "rx_frequency": 29.57,
@@ -4409,6 +4732,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.575,
         "tx_ctcss": 77,
         "rx_frequency": 430.975,
@@ -4429,6 +4753,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.675,
         "tx_ctcss": 67,
         "rx_frequency": 145.075,
@@ -4450,6 +4775,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.925,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.325,
@@ -4468,7 +4794,9 @@
     {
         "callsign": "SR8KR",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.625,
@@ -4491,6 +4819,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.575,
         "tx_ctcss": 71.9,
         "rx_frequency": 431.975,
@@ -4512,6 +4841,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6,
         "tx_ctcss": 71.9,
         "rx_frequency": 145,
@@ -4532,6 +4862,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.8,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.2,
@@ -4550,7 +4881,9 @@
     {
         "callsign": "SR8JR",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.25,
@@ -4573,6 +4906,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7,
         "tx_ctcss": false,
         "rx_frequency": 145.1,
@@ -4593,6 +4927,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.7125,
         "tx_ctcss": false,
         "rx_frequency": 431.1125,
@@ -4613,6 +4948,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.2,
         "tx_ctcss": 71.9,
         "rx_frequency": 431.6,
@@ -4633,6 +4969,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.45,
         "tx_ctcss": false,
         "rx_frequency": 430.85,
@@ -4653,6 +4990,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.4,
         "tx_ctcss": false,
         "rx_frequency": 430.8,
@@ -4674,6 +5012,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439,
         "tx_ctcss": 71.9,
         "rx_frequency": 431.4,
@@ -4694,6 +5033,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.275,
         "tx_ctcss": false,
         "rx_frequency": 430.675,
@@ -4714,6 +5054,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.8375,
         "tx_ctcss": false,
         "rx_frequency": 431.2375,
@@ -4734,6 +5075,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.375,
         "tx_ctcss": false,
         "rx_frequency": 431.775,
@@ -4754,6 +5096,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.575,
         "tx_ctcss": false,
         "rx_frequency": 431.975,
@@ -4775,6 +5118,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.425,
         "tx_ctcss": false,
         "rx_frequency": 430.825,
@@ -4795,6 +5139,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.3,
         "tx_ctcss": false,
         "rx_frequency": 431.7,
@@ -4815,6 +5160,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.65,
         "tx_ctcss": 79.7,
         "rx_frequency": 145.05,
@@ -4833,7 +5179,9 @@
     {
         "callsign": "SR8CH",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.675,
@@ -4856,6 +5204,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.65,
         "tx_ctcss": 79.7,
         "rx_frequency": 431.05,
@@ -4876,6 +5225,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.9,
         "tx_ctcss": false,
         "rx_frequency": 431.3,
@@ -4896,6 +5246,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.275,
@@ -4916,6 +5267,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.275,
@@ -4936,6 +5288,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7875,
         "tx_ctcss": 71.9,
         "rx_frequency": 145.1875,
@@ -4958,6 +5311,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.0125,
         "tx_ctcss": false,
         "rx_frequency": 431.4125,
@@ -4978,6 +5332,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 29.59,
         "tx_ctcss": 127.3,
         "rx_frequency": 29.69,
@@ -4998,6 +5353,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 29.69,
         "tx_ctcss": 127.3,
         "rx_frequency": 29.59,
@@ -5019,6 +5375,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.35,
         "tx_ctcss": false,
         "rx_frequency": 431.75,
@@ -5039,6 +5396,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.95,
         "tx_ctcss": false,
         "rx_frequency": 431.35,
@@ -5057,7 +5415,9 @@
     {
         "callsign": "SR7ZD",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.9,
@@ -5080,6 +5440,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6,
         "tx_ctcss": false,
         "rx_frequency": 145,
@@ -5100,10 +5461,11 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439,
         "tx_ctcss": false,
         "rx_frequency": 431.4,
-        "rx_ctcss": false,
+        "rx_ctcss": 77,
         "rx_1750": false,
         "duplex": "-",
         "offset": 7.6,
@@ -5120,6 +5482,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7,
         "tx_ctcss": 77,
         "rx_frequency": 145.1,
@@ -5138,7 +5501,9 @@
     {
         "callsign": "SR7VV",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 439.1125,
@@ -5161,6 +5526,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.625,
         "tx_ctcss": 88.5,
         "rx_frequency": 145.025,
@@ -5182,6 +5548,7 @@
             "dstar",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.525,
         "tx_ctcss": false,
         "rx_frequency": 430.925,
@@ -5202,6 +5569,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.4875,
         "tx_ctcss": false,
         "rx_frequency": 431.8875,
@@ -5222,6 +5590,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.45,
         "tx_ctcss": false,
         "rx_frequency": 431.85,
@@ -5242,6 +5611,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.125,
         "tx_ctcss": false,
         "rx_frequency": 431.525,
@@ -5262,6 +5632,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.1,
         "tx_ctcss": false,
         "rx_frequency": 431.5,
@@ -5282,6 +5653,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.55,
         "tx_ctcss": false,
         "rx_frequency": 431.95,
@@ -5302,6 +5674,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.65,
         "tx_ctcss": false,
         "rx_frequency": 431.05,
@@ -5322,6 +5695,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.4,
         "tx_ctcss": 0,
         "rx_frequency": 431.8,
@@ -5343,6 +5717,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.675,
         "tx_ctcss": 118.8,
         "rx_frequency": 431.075,
@@ -5363,6 +5738,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.125,
         "tx_ctcss": false,
         "rx_frequency": 145.3,
@@ -5383,6 +5759,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": false,
         "rx_frequency": 431.275,
@@ -5401,7 +5778,9 @@
     {
         "callsign": "SR7ST",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 439.15,
@@ -5422,7 +5801,9 @@
     {
         "callsign": "SR7SI",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.825,
@@ -5443,7 +5824,9 @@
     {
         "callsign": "SR7SC",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.325,
@@ -5466,6 +5849,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.0625,
         "tx_ctcss": false,
         "rx_frequency": 431.4625,
@@ -5485,8 +5869,10 @@
         "callsign": "SR7PB",
         "modes": [
             "fm",
-            "echolink",
             "c4fm"
+        ],
+        "networks": [
+            "echolink"
         ],
         "tx_frequency": 438.65,
         "tx_ctcss": 118.8,
@@ -5506,7 +5892,9 @@
     {
         "callsign": "SR7PA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.4,
@@ -5527,7 +5915,9 @@
     {
         "callsign": "SR7OS",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.475,
@@ -5550,6 +5940,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6625,
         "tx_ctcss": false,
         "rx_frequency": 145.0625,
@@ -5570,6 +5961,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.475,
         "tx_ctcss": false,
         "rx_frequency": 430.875,
@@ -5590,6 +5982,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.7,
         "tx_ctcss": false,
         "rx_frequency": 1270.7,
@@ -5611,6 +6004,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.2,
         "tx_ctcss": false,
         "rx_frequency": 431.6,
@@ -5631,6 +6025,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": false,
         "rx_frequency": 431.275,
@@ -5651,6 +6046,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 145.7125,
         "tx_ctcss": false,
         "rx_frequency": 145.1125,
@@ -5669,7 +6065,9 @@
     {
         "callsign": "SR7LDZ",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.35,
@@ -5692,6 +6090,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7375,
         "tx_ctcss": false,
         "rx_frequency": 145.1375,
@@ -5712,6 +6111,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.85,
         "tx_ctcss": false,
         "rx_frequency": 431.25,
@@ -5732,6 +6132,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.225,
         "tx_ctcss": false,
         "rx_frequency": 430.625,
@@ -5752,6 +6153,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.45,
         "tx_ctcss": false,
         "rx_frequency": 430.85,
@@ -5772,6 +6174,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.075,
         "tx_ctcss": 77,
         "rx_frequency": 431.475,
@@ -5792,6 +6195,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.55,
         "tx_ctcss": 77,
         "rx_frequency": 431.95,
@@ -5812,6 +6216,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.675,
         "tx_ctcss": false,
         "rx_frequency": 145.075,
@@ -5832,6 +6237,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.925,
         "tx_ctcss": false,
         "rx_frequency": 431.325,
@@ -5852,6 +6258,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.425,
         "tx_ctcss": 88.5,
         "rx_frequency": 431.825,
@@ -5859,7 +6266,7 @@
         "rx_1750": false,
         "duplex": "-",
         "offset": 7.6,
-        "status": "off",
+        "status": "working",
         "coordinates": [
             50.895799,
             20.665477
@@ -5870,15 +6277,17 @@
     {
         "callsign": "SR7KI",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
-        "tx_frequency": 438.725,
+        "tx_frequency": 431.125,
         "tx_ctcss": 88.5,
-        "rx_frequency": 431.125,
+        "rx_frequency": 438.725,
         "rx_ctcss": 88.5,
         "rx_1750": false,
-        "duplex": "-",
+        "duplex": "+",
         "offset": 7.6,
         "status": "working",
         "coordinates": [
@@ -5891,7 +6300,9 @@
     {
         "callsign": "SR7KGO",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -5915,6 +6326,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.0625,
         "tx_ctcss": false,
         "rx_frequency": 431.4625,
@@ -5935,6 +6347,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.6125,
         "tx_ctcss": false,
         "rx_frequency": 431.0125,
@@ -5955,6 +6368,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7625,
         "tx_ctcss": 77,
         "rx_frequency": 145.1625,
@@ -5975,6 +6389,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.325,
         "tx_ctcss": false,
         "rx_frequency": 430.725,
@@ -5995,6 +6410,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.2875,
         "tx_ctcss": false,
         "rx_frequency": 431.6875,
@@ -6015,6 +6431,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.275,
         "tx_ctcss": false,
         "rx_frequency": 430.675,
@@ -6035,6 +6452,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.4125,
         "tx_ctcss": false,
         "rx_frequency": 431.8125,
@@ -6055,6 +6473,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 145.575,
         "tx_ctcss": false,
         "rx_frequency": 144.975,
@@ -6073,7 +6492,9 @@
     {
         "callsign": "SR7BU",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.2375,
@@ -6094,7 +6515,9 @@
     {
         "callsign": "SR7ABZ",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 145.275,
@@ -6117,6 +6540,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6375,
         "tx_ctcss": 67,
         "rx_frequency": 145.0375,
@@ -6137,6 +6561,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.5625,
         "tx_ctcss": false,
         "rx_frequency": 431.9625,
@@ -6157,6 +6582,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.075,
         "tx_ctcss": 71.9,
         "rx_frequency": 431.475,
@@ -6177,6 +6603,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.925,
         "tx_ctcss": 94.8,
         "rx_frequency": 431.325,
@@ -6197,6 +6624,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.85,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.25,
@@ -6215,7 +6643,9 @@
     {
         "callsign": "SR6WB",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.3625,
@@ -6236,7 +6666,9 @@
     {
         "callsign": "SR6W",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -6261,6 +6693,7 @@
             "fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.4125,
         "tx_ctcss": false,
         "rx_frequency": 431.8125,
@@ -6281,6 +6714,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.0125,
         "tx_ctcss": false,
         "rx_frequency": 431.4125,
@@ -6302,6 +6736,7 @@
             "fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.3875,
         "tx_ctcss": 94.8,
         "rx_frequency": 431.7875,
@@ -6323,6 +6758,7 @@
             "fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.5375,
         "tx_ctcss": false,
         "rx_frequency": 430.9375,
@@ -6343,6 +6779,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.425,
         "tx_ctcss": false,
         "rx_frequency": 430.825,
@@ -6364,6 +6801,7 @@
             "fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.2625,
         "tx_ctcss": 94.8,
         "rx_frequency": 431.6625,
@@ -6386,6 +6824,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.75,
         "tx_ctcss": false,
         "rx_frequency": 431.15,
@@ -6404,7 +6843,9 @@
     {
         "callsign": "SR6TT",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -6428,6 +6869,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7875,
         "tx_ctcss": 94.8,
         "rx_frequency": 145.1875,
@@ -6448,6 +6890,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.2,
         "tx_ctcss": false,
         "rx_frequency": 430.6,
@@ -6468,6 +6911,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6,
         "tx_ctcss": 103.5,
         "rx_frequency": 145,
@@ -6486,7 +6930,9 @@
     {
         "callsign": "SR6PS",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.8,
@@ -6510,6 +6956,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.325,
         "tx_ctcss": 94.8,
         "rx_frequency": 431.725,
@@ -6529,7 +6976,9 @@
         "callsign": "SR6OO",
         "modes": [
             "fm",
-            "dstar",
+            "dstar"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.25,
@@ -6552,6 +7001,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": 123,
         "rx_frequency": 431.275,
@@ -6570,7 +7020,9 @@
     {
         "callsign": "SR6NR",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.425,
@@ -6594,6 +7046,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.3,
         "tx_ctcss": false,
         "rx_frequency": 431.7,
@@ -6612,7 +7065,9 @@
     {
         "callsign": "SR6MI",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.3375,
@@ -6635,6 +7090,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.725,
         "tx_ctcss": false,
         "rx_frequency": 431.125,
@@ -6653,7 +7109,9 @@
     {
         "callsign": "SR6LZM",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.6,
@@ -6674,7 +7132,9 @@
     {
         "callsign": "SR6LWS",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 439.2875,
@@ -6697,6 +7157,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7375,
         "tx_ctcss": false,
         "rx_frequency": 145.1375,
@@ -6717,6 +7178,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.675,
         "tx_ctcss": 67,
         "rx_frequency": 431.075,
@@ -6737,6 +7199,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.675,
         "tx_ctcss": 67,
         "rx_frequency": 145.075,
@@ -6757,6 +7220,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.625,
         "tx_ctcss": 94.8,
         "rx_frequency": 145.025,
@@ -6777,6 +7241,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.1875,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.5875,
@@ -6797,6 +7262,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": 71.9,
         "rx_frequency": 145.15,
@@ -6817,6 +7283,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.6375,
         "tx_ctcss": false,
         "rx_frequency": 431.0375,
@@ -6837,6 +7304,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.4625,
         "tx_ctcss": false,
         "rx_frequency": 430.8625,
@@ -6855,7 +7323,9 @@
     {
         "callsign": "SR6DST",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.6875,
@@ -6878,6 +7348,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.4875,
         "tx_ctcss": false,
         "rx_frequency": 430.8875,
@@ -6898,6 +7369,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 144.975,
         "tx_ctcss": false,
         "rx_frequency": 144.975,
@@ -6918,6 +7390,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.2625,
         "tx_ctcss": false,
         "rx_frequency": 430.6625,
@@ -6938,6 +7411,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.1375,
         "tx_ctcss": false,
         "rx_frequency": 431.5375,
@@ -6956,7 +7430,9 @@
     {
         "callsign": "SR6C",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.25,
@@ -6979,6 +7455,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7625,
         "tx_ctcss": 77,
         "rx_frequency": 145.1625,
@@ -6999,6 +7476,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.95,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.35,
@@ -7017,7 +7495,9 @@
     {
         "callsign": "SR6AA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.4,
@@ -7040,6 +7520,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 145.575,
         "tx_ctcss": false,
         "rx_frequency": 144.975,
@@ -7060,6 +7541,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.7,
         "tx_ctcss": 88.5,
         "rx_frequency": 431.1,
@@ -7081,6 +7563,7 @@
             "c4fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.25,
         "tx_ctcss": false,
         "rx_frequency": 431.65,
@@ -7101,6 +7584,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.25,
         "tx_ctcss": 127.3,
         "rx_frequency": 431.65,
@@ -7122,6 +7606,7 @@
             "dstar",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.3,
         "tx_ctcss": false,
         "rx_frequency": 430.7,
@@ -7141,8 +7626,10 @@
         "callsign": "SR5YAM",
         "modes": [
             "dstar",
-            "echolink",
             "c4fm"
+        ],
+        "networks": [
+            "echolink"
         ],
         "tx_frequency": 430.5375,
         "tx_ctcss": false,
@@ -7164,6 +7651,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439,
         "tx_ctcss": 127.3,
         "rx_frequency": 431.4,
@@ -7184,6 +7672,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.4625,
         "tx_ctcss": 127.3,
         "rx_frequency": 430.8625,
@@ -7204,6 +7693,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.5,
         "tx_ctcss": false,
         "rx_frequency": 430.9,
@@ -7224,6 +7714,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.775,
         "tx_ctcss": false,
         "rx_frequency": 431.175,
@@ -7242,7 +7733,9 @@
     {
         "callsign": "SR5WP",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.625,
@@ -7265,6 +7758,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.9,
         "tx_ctcss": false,
         "rx_frequency": 431.3,
@@ -7285,6 +7779,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.2,
         "tx_ctcss": false,
         "rx_frequency": 431.6,
@@ -7306,6 +7801,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.4,
         "tx_ctcss": false,
         "rx_frequency": 430.8,
@@ -7326,6 +7822,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.6,
         "tx_ctcss": false,
         "rx_frequency": 431,
@@ -7346,6 +7843,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.55,
         "tx_ctcss": false,
         "rx_frequency": 430.95,
@@ -7367,6 +7865,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.3375,
         "tx_ctcss": 127.3,
         "rx_frequency": 430.7375,
@@ -7374,7 +7873,7 @@
         "rx_1750": false,
         "duplex": "-",
         "offset": 7.6,
-        "status": "off",
+        "status": "working",
         "coordinates": [
             52.268254,
             21.128688
@@ -7387,6 +7886,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.35,
         "tx_ctcss": 127.3,
         "rx_frequency": 431.75,
@@ -7408,6 +7908,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": 127.3,
         "rx_frequency": 145.15,
@@ -7428,6 +7929,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.825,
         "tx_ctcss": 67,
         "rx_frequency": 431.225,
@@ -7448,6 +7950,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.525,
         "tx_ctcss": false,
         "rx_frequency": 430.925,
@@ -7468,6 +7971,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.4375,
         "tx_ctcss": false,
         "rx_frequency": 431.8375,
@@ -7488,6 +7992,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.3,
         "tx_ctcss": false,
         "rx_frequency": 431.7,
@@ -7509,6 +8014,7 @@
             "dstar",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.9125,
         "tx_ctcss": false,
         "rx_frequency": 431.3125,
@@ -7529,6 +8035,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.775,
         "tx_ctcss": false,
         "rx_frequency": 145.175,
@@ -7549,6 +8056,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.9875,
         "tx_ctcss": false,
         "rx_frequency": 431.3875,
@@ -7570,6 +8078,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.75,
         "tx_ctcss": 127.3,
         "rx_frequency": 431.15,
@@ -7588,7 +8097,9 @@
     {
         "callsign": "SR5S",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -7610,7 +8121,9 @@
     {
         "callsign": "SR5RR",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -7635,6 +8148,7 @@
             "fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.75,
         "tx_ctcss": 118.8,
         "rx_frequency": 431.15,
@@ -7653,7 +8167,9 @@
     {
         "callsign": "SR5RAD",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 145.7875,
@@ -7676,6 +8192,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.925,
         "tx_ctcss": 118.8,
         "rx_frequency": 431.325,
@@ -7696,6 +8213,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6,
         "tx_ctcss": false,
         "rx_frequency": 145,
@@ -7716,6 +8234,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.525,
         "tx_ctcss": false,
         "rx_frequency": 430.925,
@@ -7734,7 +8253,9 @@
     {
         "callsign": "SR5PR",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.175,
@@ -7755,7 +8276,9 @@
     {
         "callsign": "SR5POT",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.15,
@@ -7778,6 +8301,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6625,
         "tx_ctcss": false,
         "rx_frequency": 145.0625,
@@ -7798,6 +8322,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.3875,
         "tx_ctcss": false,
         "rx_frequency": 431.7875,
@@ -7816,7 +8341,9 @@
     {
         "callsign": "SR5PL",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.125,
@@ -7839,6 +8366,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.725,
         "tx_ctcss": false,
         "rx_frequency": 145.125,
@@ -7857,7 +8385,9 @@
     {
         "callsign": "SR5OS",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -7881,9 +8411,11 @@
         "modes": [
             "fm",
             "dmr",
-            "echolink",
             "c4fm",
             "dstar"
+        ],
+        "networks": [
+            "echolink"
         ],
         "tx_frequency": 439.2625,
         "tx_ctcss": false,
@@ -7906,6 +8438,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.675,
         "tx_ctcss": 127.3,
         "rx_frequency": 145.075,
@@ -7926,6 +8459,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.975,
         "tx_ctcss": false,
         "rx_frequency": 431.375,
@@ -7946,6 +8480,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.425,
         "tx_ctcss": 127.3,
         "rx_frequency": 431.825,
@@ -7966,6 +8501,7 @@
         "modes": [
             "m17"
         ],
+        "networks": [],
         "tx_frequency": 438.8125,
         "tx_ctcss": false,
         "rx_frequency": 431.2125,
@@ -7984,7 +8520,9 @@
     {
         "callsign": "SR5MM",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -8008,6 +8546,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.8875,
         "tx_ctcss": false,
         "rx_frequency": 431.2875,
@@ -8028,6 +8567,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.1,
         "tx_ctcss": false,
         "rx_frequency": 1270.1,
@@ -8048,6 +8588,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.4,
         "tx_ctcss": false,
         "rx_frequency": 1270.4,
@@ -8066,7 +8607,9 @@
     {
         "callsign": "SR5KPN",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.2,
@@ -8089,6 +8632,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 29.68,
         "tx_ctcss": 127.3,
         "rx_frequency": 29.58,
@@ -8107,7 +8651,9 @@
     {
         "callsign": "SR5KO",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.2,
@@ -8130,6 +8676,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.4,
         "tx_ctcss": false,
         "rx_frequency": 431.8,
@@ -8151,6 +8698,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.0375,
         "tx_ctcss": 127.3,
         "rx_frequency": 431.4375,
@@ -8171,6 +8719,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.8,
         "tx_ctcss": 127.3,
         "rx_frequency": 431.2,
@@ -8192,6 +8741,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.25,
         "tx_ctcss": 127.3,
         "rx_frequency": 430.65,
@@ -8212,6 +8762,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.15,
         "tx_ctcss": false,
         "rx_frequency": 430.55,
@@ -8230,7 +8781,9 @@
     {
         "callsign": "SR5E",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.375,
@@ -8253,6 +8806,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.3625,
         "tx_ctcss": false,
         "rx_frequency": 431.7625,
@@ -8276,6 +8830,7 @@
             "apco25",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.5875,
         "tx_ctcss": 127.3,
         "rx_frequency": 144.9875,
@@ -8296,6 +8851,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 145.6375,
         "tx_ctcss": false,
         "rx_frequency": 145.0375,
@@ -8316,6 +8872,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.2125,
         "tx_ctcss": false,
         "rx_frequency": 430.6125,
@@ -8336,6 +8893,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.4375,
         "tx_ctcss": false,
         "rx_frequency": 430.8375,
@@ -8354,7 +8912,9 @@
     {
         "callsign": "SR5AWK",
         "modes": [
-            "tetra",
+            "tetra"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 431.6125,
@@ -8375,7 +8935,9 @@
     {
         "callsign": "SR4X",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -8400,6 +8962,7 @@
             "dstar",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.4625,
         "tx_ctcss": false,
         "rx_frequency": 431.8625,
@@ -8420,6 +8983,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.4875,
         "tx_ctcss": false,
         "rx_frequency": 431.8875,
@@ -8441,6 +9005,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.6,
         "tx_ctcss": false,
         "rx_frequency": 431,
@@ -8461,6 +9026,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.5125,
         "tx_ctcss": false,
         "rx_frequency": 431.9125,
@@ -8482,6 +9048,7 @@
             "dstar",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.425,
         "tx_ctcss": false,
         "rx_frequency": 431.825,
@@ -8502,6 +9069,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.725,
         "tx_ctcss": false,
         "rx_frequency": 145.125,
@@ -8522,6 +9090,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.45,
         "tx_ctcss": false,
         "rx_frequency": 431.85,
@@ -8543,6 +9112,7 @@
             "fm",
             "atv"
         ],
+        "networks": [],
         "tx_frequency": 439.325,
         "tx_ctcss": false,
         "rx_frequency": 431.725,
@@ -8563,6 +9133,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.9,
         "tx_ctcss": false,
         "rx_frequency": 431.3,
@@ -8581,7 +9152,9 @@
     {
         "callsign": "SR4SU",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.8,
@@ -8605,6 +9178,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": false,
         "rx_frequency": 431.275,
@@ -8625,6 +9199,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.375,
         "tx_ctcss": 67,
         "rx_frequency": 431.775,
@@ -8645,6 +9220,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.575,
         "tx_ctcss": 67,
         "rx_frequency": 144.975,
@@ -8665,6 +9241,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7,
         "tx_ctcss": 67,
         "rx_frequency": 145.1,
@@ -8683,7 +9260,9 @@
     {
         "callsign": "SR4PA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "extremelink"
         ],
         "tx_frequency": 145.775,
@@ -8706,6 +9285,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439,
         "tx_ctcss": 94.8,
         "rx_frequency": 431.4,
@@ -8724,7 +9304,9 @@
     {
         "callsign": "SR4OS",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "minilink"
         ],
@@ -8750,6 +9332,7 @@
             "dstar",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.95,
         "tx_ctcss": false,
         "rx_frequency": 431.35,
@@ -8770,6 +9353,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.275,
         "tx_ctcss": false,
         "rx_frequency": 430.675,
@@ -8790,6 +9374,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.5,
         "tx_ctcss": false,
         "rx_frequency": 430.9,
@@ -8808,7 +9393,9 @@
     {
         "callsign": "SR4ON",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.675,
@@ -8831,6 +9418,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6875,
         "tx_ctcss": false,
         "rx_frequency": 145.0875,
@@ -8852,6 +9440,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.4,
         "tx_ctcss": false,
         "rx_frequency": 431.8,
@@ -8872,6 +9461,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.725,
         "tx_ctcss": 67,
         "rx_frequency": 145.125,
@@ -8895,6 +9485,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.15,
         "tx_ctcss": 67,
         "rx_frequency": 430.55,
@@ -8915,6 +9506,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.15,
         "tx_ctcss": 67,
         "rx_frequency": 431.15,
@@ -8933,7 +9525,9 @@
     {
         "callsign": "SR4MO",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "minilink"
         ],
@@ -8957,6 +9551,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.525,
         "tx_ctcss": false,
         "rx_frequency": 430.925,
@@ -8977,6 +9572,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.225,
         "tx_ctcss": false,
         "rx_frequency": 430.625,
@@ -8995,7 +9591,9 @@
     {
         "callsign": "SR4MI",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.75,
@@ -9016,7 +9614,9 @@
     {
         "callsign": "SR4M",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.6,
@@ -9037,7 +9637,9 @@
     {
         "callsign": "SR4LU",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "extremelink"
         ],
@@ -9061,6 +9663,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.1,
         "tx_ctcss": 67,
         "rx_frequency": 431.5,
@@ -9081,6 +9684,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.6,
         "tx_ctcss": false,
         "rx_frequency": 1270.6,
@@ -9099,7 +9703,9 @@
     {
         "callsign": "SR4LG",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 438.725,
@@ -9122,6 +9728,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.2,
         "tx_ctcss": 67,
         "rx_frequency": 1270.2,
@@ -9144,6 +9751,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.1,
         "tx_ctcss": false,
         "rx_frequency": 430.5,
@@ -9164,6 +9772,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.275,
         "tx_ctcss": false,
         "rx_frequency": 431.675,
@@ -9182,7 +9791,9 @@
     {
         "callsign": "SR4J",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.625,
@@ -9206,6 +9817,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.525,
         "tx_ctcss": false,
         "rx_frequency": 431.925,
@@ -9224,7 +9836,9 @@
     {
         "callsign": "SR4EL",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.05,
@@ -9247,6 +9861,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.5,
         "tx_ctcss": false,
         "rx_frequency": 431.9,
@@ -9267,6 +9882,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.6125,
         "tx_ctcss": false,
         "rx_frequency": 431.0125,
@@ -9285,7 +9901,9 @@
     {
         "callsign": "SR4DM",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.3,
@@ -9306,7 +9924,9 @@
     {
         "callsign": "SR4DGT",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.575,
@@ -9329,6 +9949,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.25,
         "tx_ctcss": false,
         "rx_frequency": 430.65,
@@ -9349,6 +9970,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.8625,
         "tx_ctcss": false,
         "rx_frequency": 431.2625,
@@ -9367,7 +9989,9 @@
     {
         "callsign": "SR4D",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.7875,
@@ -9391,6 +10015,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.025,
         "tx_ctcss": 67,
         "rx_frequency": 431.425,
@@ -9411,6 +10036,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.6,
         "tx_ctcss": 67,
         "rx_frequency": 431,
@@ -9431,6 +10057,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.925,
         "tx_ctcss": false,
         "rx_frequency": 431.325,
@@ -9451,6 +10078,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.25,
         "tx_ctcss": false,
         "rx_frequency": 431.65,
@@ -9472,6 +10100,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.4625,
         "tx_ctcss": 67,
         "rx_frequency": 430.8625,
@@ -9492,6 +10121,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.3625,
         "tx_ctcss": false,
         "rx_frequency": 430.7625,
@@ -9510,7 +10140,9 @@
     {
         "callsign": "SR4BA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "extremelink"
         ],
@@ -9534,6 +10166,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6875,
         "tx_ctcss": 67,
         "rx_frequency": 145.0875,
@@ -9554,6 +10187,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.3375,
         "tx_ctcss": 67,
         "rx_frequency": 431.7375,
@@ -9571,7 +10205,8 @@
     },
     {
         "callsign": "SR4ALL",
-        "modes": [
+        "modes": [],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 430.975,
@@ -9595,6 +10230,7 @@
             "dstar",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.35,
         "tx_ctcss": false,
         "rx_frequency": 431.75,
@@ -9615,6 +10251,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.75,
         "tx_ctcss": 79.7,
         "rx_frequency": 431.15,
@@ -9635,6 +10272,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.075,
         "tx_ctcss": 203.5,
         "rx_frequency": 431.475,
@@ -9655,6 +10293,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.5,
         "tx_ctcss": false,
         "rx_frequency": 1270.5,
@@ -9676,6 +10315,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.3625,
         "tx_ctcss": false,
         "rx_frequency": 430.7625,
@@ -9696,6 +10336,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7125,
         "tx_ctcss": 71.9,
         "rx_frequency": 145.1125,
@@ -9714,7 +10355,9 @@
     {
         "callsign": "SR3XXX",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 438.7,
@@ -9738,6 +10381,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.025,
         "tx_ctcss": 110.9,
         "rx_frequency": 431.425,
@@ -9758,6 +10402,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7625,
         "tx_ctcss": 110.9,
         "rx_frequency": 145.1625,
@@ -9778,6 +10423,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.325,
         "tx_ctcss": 110.9,
         "rx_frequency": 431.725,
@@ -9798,6 +10444,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.4375,
         "tx_ctcss": false,
         "rx_frequency": 431.8375,
@@ -9818,6 +10465,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.2375,
         "tx_ctcss": false,
         "rx_frequency": 431.6375,
@@ -9838,6 +10486,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.4125,
         "tx_ctcss": false,
         "rx_frequency": 430.8125,
@@ -9858,6 +10507,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6375,
         "tx_ctcss": 110.9,
         "rx_frequency": 145.0375,
@@ -9876,7 +10526,9 @@
     {
         "callsign": "SR3SN",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -9900,6 +10552,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.825,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.225,
@@ -9920,6 +10573,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.9,
         "tx_ctcss": 110.9,
         "rx_frequency": 431.3,
@@ -9940,6 +10594,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.2,
         "tx_ctcss": 110.9,
         "rx_frequency": 431.6,
@@ -9960,6 +10615,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.4,
         "tx_ctcss": false,
         "rx_frequency": 1270.4,
@@ -9980,6 +10636,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": 110.9,
         "rx_frequency": 431.275,
@@ -10000,6 +10657,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.65,
         "tx_ctcss": 110.9,
         "rx_frequency": 145.05,
@@ -10020,6 +10678,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.3,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.7,
@@ -10040,6 +10699,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.725,
         "tx_ctcss": false,
         "rx_frequency": 145.125,
@@ -10060,6 +10720,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6875,
         "tx_ctcss": 110.9,
         "rx_frequency": 145.0875,
@@ -10078,7 +10739,9 @@
     {
         "callsign": "SR3MDW",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.225,
@@ -10101,6 +10764,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.575,
         "tx_ctcss": false,
         "rx_frequency": 431.975,
@@ -10121,6 +10785,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.125,
         "tx_ctcss": 110.9,
         "rx_frequency": 431.525,
@@ -10141,6 +10806,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.275,
         "tx_ctcss": 103.5,
         "rx_frequency": 431.675,
@@ -10161,6 +10827,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.775,
         "tx_ctcss": 103.5,
         "rx_frequency": 145.175,
@@ -10181,6 +10848,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.6875,
         "tx_ctcss": false,
         "rx_frequency": 431.0875,
@@ -10201,6 +10869,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.8,
         "tx_ctcss": false,
         "rx_frequency": 431.2,
@@ -10223,6 +10892,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.4375,
         "tx_ctcss": false,
         "rx_frequency": 430.8375,
@@ -10243,6 +10913,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.375,
         "tx_ctcss": false,
         "rx_frequency": 431.775,
@@ -10263,6 +10934,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": false,
         "rx_frequency": 145.15,
@@ -10281,7 +10953,9 @@
     {
         "callsign": "SR3JA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.975,
@@ -10302,7 +10976,9 @@
     {
         "callsign": "SR3J",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 439.5,
@@ -10325,6 +11001,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.95,
         "tx_ctcss": false,
         "rx_frequency": 431.35,
@@ -10345,6 +11022,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.175,
         "tx_ctcss": false,
         "rx_frequency": 431.575,
@@ -10365,6 +11043,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": 77,
         "rx_frequency": 145.15,
@@ -10385,6 +11064,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.9625,
         "tx_ctcss": false,
         "rx_frequency": 431.3625,
@@ -10405,6 +11085,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.7375,
         "tx_ctcss": false,
         "rx_frequency": 431.1375,
@@ -10425,6 +11106,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.3375,
         "tx_ctcss": false,
         "rx_frequency": 430.7375,
@@ -10447,6 +11129,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.2875,
         "tx_ctcss": false,
         "rx_frequency": 430.6875,
@@ -10467,6 +11150,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 145.6125,
         "tx_ctcss": false,
         "rx_frequency": 145.0125,
@@ -10474,7 +11158,7 @@
         "rx_1750": false,
         "duplex": "-",
         "offset": 0.6,
-        "status": "working",
+        "status": "off",
         "coordinates": [
             52.459156,
             16.905933
@@ -10487,6 +11171,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.125,
         "tx_ctcss": false,
         "rx_frequency": 430.525,
@@ -10507,6 +11192,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.55,
         "tx_ctcss": false,
         "rx_frequency": 430.95,
@@ -10527,6 +11213,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.65,
         "tx_ctcss": 94.8,
         "rx_frequency": 145.05,
@@ -10547,6 +11234,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.025,
         "tx_ctcss": false,
         "rx_frequency": 431.425,
@@ -10567,6 +11255,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.225,
         "tx_ctcss": false,
         "rx_frequency": 431.625,
@@ -10587,6 +11276,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.025,
         "tx_ctcss": false,
         "rx_frequency": 431.425,
@@ -10607,6 +11297,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.8125,
         "tx_ctcss": false,
         "rx_frequency": 431.2125,
@@ -10628,6 +11319,7 @@
             "dmr",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.3375,
         "tx_ctcss": false,
         "rx_frequency": 431.7375,
@@ -10648,6 +11340,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": 74.4,
         "rx_frequency": 145.15,
@@ -10666,7 +11359,9 @@
     {
         "callsign": "SR2VV",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "extremelink"
         ],
         "tx_frequency": 439.1375,
@@ -10689,6 +11384,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.3625,
         "tx_ctcss": false,
         "rx_frequency": 431.7625,
@@ -10709,6 +11405,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.9625,
         "tx_ctcss": false,
         "rx_frequency": 431.3625,
@@ -10729,6 +11426,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.6875,
         "tx_ctcss": false,
         "rx_frequency": 431.0875,
@@ -10749,6 +11447,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.8375,
         "tx_ctcss": 94.8,
         "rx_frequency": 431.2375,
@@ -10767,10 +11466,11 @@
     {
         "callsign": "SR2UVF",
         "modes": [
-            "dstar",
+            "c4fm",
             "dmr",
-            "c4fm"
+            "dstar"
         ],
+        "networks": [],
         "tx_frequency": 438.9375,
         "tx_ctcss": false,
         "rx_frequency": 431.3375,
@@ -10778,7 +11478,7 @@
         "rx_1750": false,
         "duplex": "-",
         "offset": 7.6,
-        "status": "working",
+        "status": "off",
         "coordinates": [
             53.142333,
             18.134742
@@ -10789,7 +11489,9 @@
     {
         "callsign": "SR2T",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 145.775,
@@ -10810,7 +11512,9 @@
     {
         "callsign": "SR2SWR",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 438.775,
@@ -10831,7 +11535,9 @@
     {
         "callsign": "SR2SL",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 438.75,
@@ -10854,6 +11560,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.6625,
         "tx_ctcss": false,
         "rx_frequency": 431.0625,
@@ -10872,7 +11579,9 @@
     {
         "callsign": "SR2PB",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -10894,7 +11603,9 @@
     {
         "callsign": "SR2PA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "minilink"
         ],
@@ -10918,6 +11629,7 @@
         "modes": [
             "tetra"
         ],
+        "networks": [],
         "tx_frequency": 439.475,
         "tx_ctcss": false,
         "rx_frequency": 431.875,
@@ -10938,6 +11650,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": false,
         "rx_frequency": 431.275,
@@ -10958,6 +11671,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.0625,
         "tx_ctcss": false,
         "rx_frequency": 431.4625,
@@ -10978,6 +11692,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.25,
         "tx_ctcss": 88.5,
         "rx_frequency": 431.65,
@@ -10996,7 +11711,9 @@
     {
         "callsign": "SR2KU",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 439.425,
@@ -11019,6 +11736,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7125,
         "tx_ctcss": 88.5,
         "rx_frequency": 145.1125,
@@ -11039,6 +11757,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.1625,
         "tx_ctcss": 74.4,
         "rx_frequency": 431.5625,
@@ -11059,6 +11778,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.5875,
         "tx_ctcss": 74.4,
         "rx_frequency": 144.9875,
@@ -11080,6 +11800,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.2375,
         "tx_ctcss": false,
         "rx_frequency": 430.6375,
@@ -11098,7 +11819,9 @@
     {
         "callsign": "SR2GT",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 439.025,
@@ -11121,6 +11844,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.55,
         "tx_ctcss": 94.8,
         "rx_frequency": 430.95,
@@ -11139,7 +11863,9 @@
     {
         "callsign": "SR2GR",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "fmpoland"
         ],
@@ -11163,6 +11889,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.325,
         "tx_ctcss": 94.8,
         "rx_frequency": 431.725,
@@ -11183,6 +11910,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.2875,
         "tx_ctcss": false,
         "rx_frequency": 430.6875,
@@ -11201,7 +11929,9 @@
     {
         "callsign": "SR2GDA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "minilink"
         ],
@@ -11223,7 +11953,9 @@
     {
         "callsign": "SR2GD-C",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "minilink"
         ],
@@ -11247,6 +11979,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.0625,
         "tx_ctcss": false,
         "rx_frequency": 431.4625,
@@ -11267,6 +12000,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.075,
         "tx_ctcss": 94.8,
         "rx_frequency": 431.475,
@@ -11285,7 +12019,9 @@
     {
         "callsign": "SR2GA",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "minilink"
         ],
         "tx_frequency": 438.975,
@@ -11308,6 +12044,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.7,
         "tx_ctcss": false,
         "rx_frequency": 145.1,
@@ -11326,7 +12063,9 @@
     {
         "callsign": "SR2FM",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmlink"
         ],
         "tx_frequency": 439.5375,
@@ -11347,7 +12086,9 @@
     {
         "callsign": "SR2EL",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink",
             "minilink"
         ],
@@ -11371,6 +12112,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.5625,
         "tx_ctcss": false,
         "rx_frequency": 431.9625,
@@ -11391,6 +12133,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.3125,
         "tx_ctcss": false,
         "rx_frequency": 431.7125,
@@ -11411,6 +12154,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.3875,
         "tx_ctcss": false,
         "rx_frequency": 430.7875,
@@ -11431,6 +12175,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6,
         "tx_ctcss": 94.8,
         "rx_frequency": 145,
@@ -11451,6 +12196,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.725,
         "tx_ctcss": false,
         "rx_frequency": 431.125,
@@ -11471,6 +12217,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.7,
         "tx_ctcss": false,
         "rx_frequency": 431.1,
@@ -11491,6 +12238,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.1,
         "tx_ctcss": 77,
         "rx_frequency": 431.5,
@@ -11511,6 +12259,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.725,
         "tx_ctcss": 67,
         "rx_frequency": 145.125,
@@ -11531,6 +12280,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439,
         "tx_ctcss": false,
         "rx_frequency": 431.4,
@@ -11552,6 +12302,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.2875,
         "tx_ctcss": false,
         "rx_frequency": 431.6875,
@@ -11573,6 +12324,7 @@
             "fm",
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 1298.175,
         "tx_ctcss": 71.9,
         "rx_frequency": 1270.175,
@@ -11594,6 +12346,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.8375,
         "tx_ctcss": false,
         "rx_frequency": 431.2375,
@@ -11614,6 +12367,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.3,
         "tx_ctcss": false,
         "rx_frequency": 431.7,
@@ -11634,6 +12388,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.3125,
         "tx_ctcss": false,
         "rx_frequency": 430.7125,
@@ -11654,6 +12409,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6375,
         "tx_ctcss": 82.5,
         "rx_frequency": 145.0375,
@@ -11675,6 +12431,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.2625,
         "tx_ctcss": 82.5,
         "rx_frequency": 431.6625,
@@ -11695,6 +12452,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.2,
         "tx_ctcss": 82.5,
         "rx_frequency": 431.6,
@@ -11715,6 +12473,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.725,
         "tx_ctcss": 82.5,
         "rx_frequency": 431.125,
@@ -11735,6 +12494,7 @@
         "modes": [
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.625,
         "tx_ctcss": false,
         "rx_frequency": 431.025,
@@ -11756,6 +12516,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 438.65,
         "tx_ctcss": false,
         "rx_frequency": 431.05,
@@ -11776,6 +12537,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.4,
         "tx_ctcss": 82.5,
         "rx_frequency": 431.8,
@@ -11796,6 +12558,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 439.3875,
         "tx_ctcss": false,
         "rx_frequency": 431.7875,
@@ -11816,6 +12579,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.4125,
         "tx_ctcss": false,
         "rx_frequency": 431.8125,
@@ -11836,6 +12600,7 @@
         "modes": [
             "dstar"
         ],
+        "networks": [],
         "tx_frequency": 439.025,
         "tx_ctcss": false,
         "rx_frequency": 431.425,
@@ -11856,6 +12621,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.675,
         "tx_ctcss": false,
         "rx_frequency": 145.075,
@@ -11876,6 +12642,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.675,
         "tx_ctcss": false,
         "rx_frequency": 431.075,
@@ -11896,6 +12663,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 145.75,
         "tx_ctcss": false,
         "rx_frequency": 145.15,
@@ -11917,6 +12685,7 @@
             "fm",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6125,
         "tx_ctcss": 82.5,
         "rx_frequency": 145.0125,
@@ -11938,6 +12707,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6125,
         "tx_ctcss": false,
         "rx_frequency": 145.0125,
@@ -11958,6 +12728,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 29.67,
         "tx_ctcss": 82.5,
         "rx_frequency": 29.57,
@@ -11978,6 +12749,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.075,
         "tx_ctcss": 82.5,
         "rx_frequency": 431.475,
@@ -12000,6 +12772,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 145.77,
         "tx_ctcss": 82.5,
         "rx_frequency": 145.17,
@@ -12020,6 +12793,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.875,
         "tx_ctcss": 82.5,
         "rx_frequency": 431.275,
@@ -12040,6 +12814,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.15,
         "tx_ctcss": false,
         "rx_frequency": 431.55,
@@ -12060,6 +12835,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 1298.3,
         "tx_ctcss": false,
         "rx_frequency": 1270.3,
@@ -12081,6 +12857,7 @@
             "dmr",
             "c4fm"
         ],
+        "networks": [],
         "tx_frequency": 439.225,
         "tx_ctcss": false,
         "rx_frequency": 431.625,
@@ -12102,6 +12879,7 @@
             "fm",
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 145.7,
         "tx_ctcss": 82.5,
         "rx_frequency": 145.1,
@@ -12120,7 +12898,9 @@
     {
         "callsign": "SR1G",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "echolink"
         ],
         "tx_frequency": 145.625,
@@ -12143,6 +12923,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 145.6125,
         "tx_ctcss": 77,
         "rx_frequency": 145.0125,
@@ -12163,6 +12944,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.7125,
         "tx_ctcss": false,
         "rx_frequency": 431.1125,
@@ -12181,7 +12963,9 @@
     {
         "callsign": "SR0DZ",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.5375,
@@ -12204,6 +12988,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 439.5125,
         "tx_ctcss": false,
         "rx_frequency": 431.9125,
@@ -12224,6 +13009,7 @@
         "modes": [
             "dmr"
         ],
+        "networks": [],
         "tx_frequency": 438.625,
         "tx_ctcss": false,
         "rx_frequency": 431.025,
@@ -12244,6 +13030,7 @@
         "modes": [
             "fm"
         ],
+        "networks": [],
         "tx_frequency": 438.825,
         "tx_ctcss": 82.5,
         "rx_frequency": 431.225,
@@ -12262,7 +13049,9 @@
     {
         "callsign": "SR0CK",
         "modes": [
-            "fm",
+            "fm"
+        ],
+        "networks": [
             "fmpoland"
         ],
         "tx_frequency": 439.0625,
